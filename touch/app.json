@@ -2,7 +2,7 @@
     /**
      * The application's namespace, used by Sencha Command to generate classes
      */
-    "name": "9am-localization-plugin-touch",
+    "name": "nineam-localization-plugin-touch",
 
     /**
      * The file path to this application's front HTML document, relative to this app.json file

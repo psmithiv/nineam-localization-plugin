@@ -1,13 +1,13 @@
 //<debug>
 Ext.Loader.setPath({
     'Ext': 'touch/src',
-    '9am-localization-plugin-touch': 'app',
+    'nineam-localization-plugin-touch': 'app',
     'nineam': '/plugins/nineam'
 });
 //</debug>
 
 Ext.application({
-    name: '9am-localization-plugin-touch',
+    name: 'nineam-localization-plugin-touch',
 
     requires: [
         'nineam.localization.LocaleManager',
@@ -76,7 +76,7 @@ Ext.application({
         Ext.fly('appLoadingIndicator').destroy();
 
         // Initialize the main view
-        Ext.Viewport.add(Ext.create('9am-localization-plugin-touch.view.Main'));
+        Ext.Viewport.add(Ext.create('nineam-localization-plugin-touch.view.Main'));
     },
 
     onUpdated: function() {

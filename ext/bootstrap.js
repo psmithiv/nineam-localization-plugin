@@ -1,6 +1,6 @@
 Ext.Loader.addClassPathMappings({
   "Ext": "ext/src",
-  "9am-localization-plugin-ext": "app",
+  "nineam-localization-plugin-ext": "app",
   "Ext.ux.GroupTreeChunker": "ext/src/ux/GroupTabPanel.js"
 });Ext.ClassManager.addNameAlternateMappings({
   "Ext.ux.BoxReorderer": [],
@@ -28,7 +28,7 @@ Ext.Loader.addClassPathMappings({
   "Ext.ux.DataView.Animated": [],
   "Ext.ux.ajax.SimXhr": [],
   "Ext.ux.event.RecorderManager": [],
-  "9am-localization-plugin-ext.controller.Main": [],
+  "nineam-localization-plugin-ext.controller.Main": [],
   "Ext.ux.ProgressBarPager": [],
   "Ext.ux.statusbar.StatusBar": [
     "Ext.ux.StatusBar"
@@ -46,14 +46,14 @@ Ext.Loader.addClassPathMappings({
   "Ext.ux.ToolbarDroppable": [],
   "Ext.ux.event.Maker": [],
   "Ext.ux.TabScrollerMenu": [],
-  "9am-localization-plugin-ext.view.Viewport": [],
+  "nineam-localization-plugin-ext.view.Viewport": [],
   "Ext.ux.IFrame": [],
   "Ext.ux.DataView.Draggable": [],
   "Ext.ux.TabCloseMenu": [],
   "Ext.ux.form.SearchField": [],
   "Ext.ux.LiveSearchGridPanel": [],
   "Ext.ux.grid.filter.DateFilter": [],
-  "9am-localization-plugin-ext.view.Main": [],
+  "nineam-localization-plugin-ext.view.Main": [],
   "Ext.ux.TreePicker": [],
   "Ext.ux.form.ItemSelector": [
     "Ext.ux.ItemSelector"
@@ -109,7 +109,7 @@ Ext.Loader.addClassPathMappings({
   "Ext.ux.event.RecorderManager": [
     "widget.eventrecordermanager"
   ],
-  "9am-localization-plugin-ext.controller.Main": [],
+  "nineam-localization-plugin-ext.controller.Main": [],
   "Ext.ux.ProgressBarPager": [],
   "Ext.ux.statusbar.StatusBar": [
     "widget.statusbar"
@@ -137,7 +137,7 @@ Ext.Loader.addClassPathMappings({
   "Ext.ux.TabScrollerMenu": [
     "plugin.tabscrollermenu"
   ],
-  "9am-localization-plugin-ext.view.Viewport": [],
+  "nineam-localization-plugin-ext.view.Viewport": [],
   "Ext.ux.IFrame": [
     "widget.uxiframe"
   ],
@@ -152,7 +152,7 @@ Ext.Loader.addClassPathMappings({
   "Ext.ux.grid.filter.DateFilter": [
     "gridfilter.date"
   ],
-  "9am-localization-plugin-ext.view.Main": [],
+  "nineam-localization-plugin-ext.view.Main": [],
   "Ext.ux.TreePicker": [
     "widget.treepicker"
   ],

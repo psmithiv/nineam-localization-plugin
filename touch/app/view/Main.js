@@ -1,4 +1,4 @@
-Ext.define('9am-localization-plugin-touch.view.Main', {
+Ext.define('nineam-localization-plugin-touch.view.Main', {
     extend: 'Ext.Container',
 
     requires: [
@@ -21,7 +21,7 @@ Ext.define('9am-localization-plugin-touch.view.Main', {
         items: [{
             xtype: 'titlebar',
             width: '100%',
-            title: '9am-localization-plugin'
+            title: 'nineam-localization-plugin'
         },{
             xtype: 'container',
             width: '100%',
