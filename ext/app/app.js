@@ -26,7 +26,9 @@ Ext.application({
         'nineam.localization.LocaleManager',
         'nineam.localization.LocalePlugin',
         'nineam.localization.model.ClientModel',
-        'nineam.localization.store.LocalesStore'
+        'nineam.localization.store.LocalesStore',
+        'nineam.localization.controls.Date',
+        'Ext.form.Label'
     ],
 
     name: 'nineam-localization-plugin-ext',
@@ -47,8 +49,8 @@ Ext.application({
 
         var locales = Ext.create('nineam.localization.store.LocalesStore', {
             data: [
-                {id: 'en_us', label: 'English', url: '/touch/locales/en_us.json'},
-                {id: 'es_us', label: 'Spanish', url: '/touch/locales/es_us.json'}
+                {id: 'en_us', label: 'English', url: '/ext/ext/locale/ext-lang-en.js', propertiesClazz: 'Ext.locales.en.Global'},
+                {id: 'es_us', label: 'Spanish', url: '/ext/ext/locale/ext-lang-es.js', propertiesClazz: 'Ext.locales.es.Global'}
             ]
         });
 

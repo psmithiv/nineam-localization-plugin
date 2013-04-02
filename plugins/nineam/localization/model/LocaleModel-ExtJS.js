@@ -20,6 +20,8 @@ Ext.define('nineam.localization.model.LocaleModel-ExtJS', {
     fields: [
         {name: 'id', type: 'string'},
         {name: 'label', type: 'string'},
-        {name: 'url', type: 'string'}
+        {name: 'url', type: 'string'},
+        {name: 'frameworkUrl', type: 'string'},
+        {name: 'propertiesClazz', type: 'object'}
     ]
 });

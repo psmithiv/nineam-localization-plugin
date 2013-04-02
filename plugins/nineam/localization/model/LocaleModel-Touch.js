@@ -21,7 +21,8 @@ Ext.define('nineam.localization.model.LocaleModel-Touch', {
         fields: [
             {name: 'id', type: 'string'},
             {name: 'label', type: 'string'},
-            {name: 'url', type: 'string'}
+            {name: 'url', type: 'string'},
+            {name: 'frameworkUrl', type: 'string'}
         ]
     }
 });

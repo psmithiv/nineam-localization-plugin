@@ -22,6 +22,7 @@ Ext.define("nineam-localization-plugin-ext.view.Main", {
     requires: [
         'Ext.form.Label',
         'Ext.form.field.ComboBox',
+        'Ext.picker.Date',
         'nineam.localization.LocaleManager'
     ],
 
@@ -45,18 +46,85 @@ Ext.define("nineam-localization-plugin-ext.view.Main", {
         }
     },{
         xtype: 'container',
+        height: 10
+    },{
+        xtype: 'container',
+        width: '100%',
         layout: {
             type: 'hbox'
         },
 
         items: [{
             xtype: 'label',
-            width: 105,
+            width: 160,
             text: 'Label:'
         },{
             xtype: 'label',
             plugins: [
+                { ptype: 'localization', method: 'setText', key: 'comp.title' }
+            ]
+        }]
+    },{
+        xtype: 'container',
+        height: 10
+    },{
+        xtype: 'container',
+        width: '100%',
+        layout: {
+            type: 'hbox'
+        },
+
+        items: [{
+            xtype: 'label',
+            width: 160,
+            text: 'Calender/Custom Refresh:'
+        },{
+            xtype: 'datepicker',
+            plugins: [
+                { ptype: 'localization', method: 'refresh' }
+            ]
+        }]
+    },{
+        xtype: 'container',
+        height: 10
+    },{
+        xtype: 'container',
+        width: '100%',
+        layout: {
+            type: 'hbox'
+        },
+
+        items: [{
+            xtype: 'label',
+            width: 160,
+            text: 'Button Text/Width:'
+        },{
+            xtype: 'button',
+            plugins: [
+                { ptype: 'localization', method: 'setWidth', key: 'btnWidth' },
                 { ptype: 'localization', method: 'setText', key: 'title' }
+            ]
+        }]
+    },{
+        xtype: 'container',
+        height: 10
+    },{
+        xtype: 'container',
+        width: '100%',
+        layout: {
+            type: 'hbox'
+        },
+
+        items: [{
+            xtype: 'label',
+            width: 160,
+            text: 'Panel Title:'
+        },{
+            xtype: 'panel',
+            width: 300,
+            height: 60,
+            plugins: [
+                { ptype: 'localization', method: 'setTitle', key: 'comp.title' }
             ]
         }]
     }]

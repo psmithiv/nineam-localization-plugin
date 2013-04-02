@@ -173,7 +173,7 @@ Ext.define('Ext.util.Renderable', {
         if (data.style) {
             target.setStyle(item);
         }
-        
+
         me.protoEl = null;
 
         // If this is the outermost Container, lay it out as soon as it is rendered.
@@ -243,6 +243,7 @@ Ext.define('Ext.util.Renderable', {
     },
 
     beforeRender: function () {
+        //console.log('beforeRender');
         var me = this,
             target = me.getTargetEl(),
             layout = me.getComponentLayout();
@@ -359,6 +360,7 @@ Ext.define('Ext.util.Renderable', {
      * @private
      */
     finishRender: function(containerIdx) {
+        //console.log('finishRender');
         var me = this,
             tpl, data, contentEl, el, pre, hide;
 
@@ -571,6 +573,7 @@ Ext.define('Ext.util.Renderable', {
     },
 
     getRenderTree: function() {
+        //console.log('getRenderTree');
         var me = this;
 
         if (!me.hasListeners.beforerender || me.fireEvent('beforerender', me) !== false) {
@@ -597,6 +600,7 @@ Ext.define('Ext.util.Renderable', {
     },
 
     initContainer: function(container) {
+        //console.log('initContainer');
         var me = this;
 
         // If you render a component specifying the el, we get the container
@@ -757,6 +761,8 @@ Ext.define('Ext.util.Renderable', {
      * which this component will be inserted (defaults to appending to the end of the container)
      */
     render: function(container, position) {
+        //console.log('render: ' + this.rendered);
+
         var me = this,
             el = me.el && (me.el = Ext.get(me.el)), // ensure me.el is wrapped
             vetoed,

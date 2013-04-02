@@ -317,4 +317,12 @@ Ext.onReady(function() {
         override: "Ext.form.RadioGroup",
         blankText: "You must select one item in this group"
     });
+
+    Ext.define("Ext.locales.en.Global", {
+        title: 'en.title',
+        btnWidth: 300,
+        comp: {
+            title: 'en.comp.title'
+        }
+    });
 });

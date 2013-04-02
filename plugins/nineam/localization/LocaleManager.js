@@ -20,7 +20,8 @@ Ext.define('nineam.localization.LocaleManager', {
     requires: [
         //'Ext.util.Cookies',
         'nineam.localization.event.LocaleEvent',
-        'nineam.localization.delegate.LocaleDelegate'
+        'nineam.localization.delegate.LocaleDelegate',
+        'nineam.localization.delegate.FrameworkLocaleDelegate'
     ],
 
     mixins: {
@@ -42,22 +43,34 @@ Ext.define('nineam.localization.LocaleManager', {
         var _properties = null;
 
         var clients = [];
+
+        var filesLoaded = 0;
         /**
          * Load properties file for localizing components
+         *
+         * @private
          */
         function loadPropertiesFile() {
-            var d = new nineam.localization.delegate.LocaleDelegate(loadPropertiesFileResultHandler, loadPropertiesFileFaultHandler, this);
+            //first load framework resource bundle
             var rec = _locales.findRecord('id', _locale);
-            d.loadPropertiesFile(rec.get('url'));
+            var fd = new nineam.localization.delegate.FrameworkLocaleDelegate(loadFrameworkPropertiesFileResultHandler, loadFrameworkPropertiesFileFaultHandler, this);
+            fd.loadFrameworkPropertiesFile(rec.get('url'));
         }
 
         /**
-         * Load localization properties file result handler
-         *
-         * @param {Object} result
+         * @private
+         * @param {String} result
          */
-        function loadPropertiesFileResultHandler(result) {
-            _properties = result;
+        function loadFrameworkPropertiesFileResultHandler(result) {
+            //write resource bundle to dom
+            var head = document.getElementsByTagName("head")[0];
+            var script = document.createElement('script');
+            script.type = 'text/javascript';
+            script.innerHTML = result;
+            head.appendChild(script);
+
+            var rec = _locales.findRecord('id', _locale);
+            _properties = Ext.create(rec.get('propertiesClazz'));
 
             updateClients();
 
@@ -73,18 +86,19 @@ Ext.define('nineam.localization.LocaleManager', {
         }
 
         /**
-         * Load localization properties file fault handler
+         * @private
          */
-        function loadPropertiesFileFaultHandler() {
-            //dispatch fault event
+        function loadFrameworkPropertiesFileFaultHandler() {
+
         }
 
         /**
          * Go over and update all localized components in the application
+         * @private
          */
         function updateClients() {
-            var len = clients.length;
-            for(var i=0; i<len; i++) {
+            var len = clients.length-1;
+            for(var i=len; i>-1; i--) {
                 setClient(clients[i]);
             }
         }
@@ -92,18 +106,81 @@ Ext.define('nineam.localization.LocaleManager', {
         /**
          * Call specif method on client object and pass value from _properties based on key
          *
+         * @private
          * @param {nineam.localization.model.ClientModel} clientModel
          */
         function setClient(clientModel) {
+            var client = clientModel.get('client');
+            var method = clientModel.get('method');
+            var key = clientModel.get('key');
+
+            //call method on comp with value from resource bundle (if key specified)
             try {
-                clientModel.get('client')[clientModel.get('method')].call(clientModel.get('client'), eval('_properties.' + clientModel.get('key')));
-            } catch(e) {}
+                var prop;
+                if(key) {
+                    var global = eval('_properties.' + key);
+                    prop = global ? global : eval('client.' + key);
+                } else {
+                    prop = _properties;
+                }
+                //var prop = key ? eval('_properties.' + key) : _properties;
+                client[method].call(client, prop);
+            } catch(e) {
+                console.log('!!! error: ' + e);
+            }
         }
 
-        //public
+        /*
+
+         //if(!parent.dom)
+         //    return;
+         / *
+         var toSet =  {};
+         for(var i in orig) {
+         if(typeof orig[i] == 'function') {
+         if(i.indexOf('get') > -1) {
+         try {
+         toSet[i.replace('get', 'set')] = orig[i]();
+         } catch(e) {}
+         }
+         }
+         }
+
+         //destroy original component
+         orig.destroy();
+
+         //create new comp using orig's initialConfig
+         var newComp = Ext.create(className, conf);
+
+         //repopulate new comp with orig comps properties
+         for(var ii in toSet) {
+         try {
+         newComp[ii](toSet[ii]);
+         } catch(e) {}
+         }
+         * /
+        //call setters on new comp with values from resource bundle
+        try {
+            console.log('key: ' + key + ' - value: ' + eval('_properties.' + key));
+            newComp[method].call(newComp, eval('_properties.' + key));
+        } catch(e) {}
+
+        / *
+         //execute custom method within scope of new component
+         //TODO
+
+         //add new component to original components parent
+         parent.add(newComp);
+         * /
+
+        //remove old clientModel (new clientModel was added to array when newComp was created)
+        clients.splice(clients.indexOf(clientModel), 1);
+        */
+
         /**
          * Get store of available locales
          *
+         * @public
          * @return {nineam.locale.store.LocalesStore}
          */
         this.getLocales = function() {
@@ -113,6 +190,7 @@ Ext.define('nineam.localization.LocaleManager', {
         /**
          * Set store of available locales
          *
+         * @public
          * @param value:nineam.localization.store.LocalesStore
          */
         this.setLocales = function(value) {
@@ -124,6 +202,7 @@ Ext.define('nineam.localization.LocaleManager', {
         /**
          * Get the currently selected locale
          *
+         * @public
          * @return {string}
          */
         this.getLocale = function() {
@@ -133,6 +212,7 @@ Ext.define('nineam.localization.LocaleManager', {
         /**
          * Set the current locale
          *
+         * @public
          * @param value:String
          */
         this.setLocale = function(value) {
@@ -144,6 +224,7 @@ Ext.define('nineam.localization.LocaleManager', {
         /**
          * Get loaded locales object
          *
+         * @public
          * @return {{}}
          */
         this.getProperties = function() {
@@ -152,6 +233,8 @@ Ext.define('nineam.localization.LocaleManager', {
 
         /**
          * Get id of last loaded locale
+         *
+         * @public
          * @return {string}
          */
         this.getPersistedLocale = function() {
@@ -161,6 +244,7 @@ Ext.define('nineam.localization.LocaleManager', {
         /**
          * Register a client component for localization
          *
+         * @public
          * @param {nineam.localization.model.ClientModel} clientModel
          */
         this.registerClient = function(clientModel) {
