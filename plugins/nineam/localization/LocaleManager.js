@@ -28,20 +28,22 @@ Ext.define('nineam.localization.LocaleManager', {
     },
 
     /**
-     * Has the LocaleManager has it's available locales set and loaded the initial locale file
+     * {Boolean} initialized - Has the LocaleManager has it's available locales set and loaded the initial locale file
      *
      * @private
      */
     initialized: false,
 
     /**
-     * Array of components to be localized
+     * {Array} clients - Array of components to be localized
      *
      * @private
      */
     clients: [],
 
     /**
+     * {nineam.localization.store.LocalesStore} locales - Store of available LocaleModels
+     *
      * @private
      */
     locales: null,
@@ -69,6 +71,8 @@ Ext.define('nineam.localization.LocaleManager', {
     },
 
     /**
+     * {String} locale - Id of currently selected locale
+     *
      * @private
      */
     locale: null,
@@ -96,6 +100,8 @@ Ext.define('nineam.localization.LocaleManager', {
     },
 
     /**
+     * {Object} properties - Instance of loaded locale properties class
+     *
      * @private
      */
     properties: null,
