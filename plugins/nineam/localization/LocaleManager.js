@@ -163,22 +163,24 @@ Ext.define('nineam.localization.LocaleManager', {
         script.innerHTML = result;
         head.appendChild(script);
 
-        //instantiate properties class
-        var rec = this.locales.findRecord('id', this.locale);
-        this.properties = Ext.create(rec.get('propertiesClass'));
+        var me = this;
+        setTimeout(function() {
+            //instantiate properties class
+            var rec = me.locales.findRecord('id', me.locale);
+            me.properties = Ext.create(rec.get('propertiesClass'));
 
-        //update any registered client components
-        this.updateClients();
+            me.updateClients();
 
-        //Ext.util.Cookies.set('locale', this.locale, new Date(new Date().getTime()+(1000*60*60*24*365)));
+            //Ext.util.Cookies.set('locale', this.locale, new Date(new Date().getTime()+(1000*60*60*24*365)));
 
-        this.fireEvent(nineam.localization.event.LocaleEvent.LOCALE_CHANGED, {});
+            me.fireEvent(nineam.localization.event.LocaleEvent.LOCALE_CHANGED, {});
 
-        if(!this.initialized)
-        {
-            this.initialized = true;
-            this.fireEvent(nineam.localization.event.LocaleEvent.INITIALIZED, {});
-        }
+            if(!me.initialized)
+            {
+                me.initialized = true;
+                me.fireEvent(nineam.localization.event.LocaleEvent.INITIALIZED, {});
+            }
+        }, 100);
     },
 
     /**

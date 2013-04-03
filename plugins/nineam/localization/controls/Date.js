@@ -1,4 +1,3 @@
-
  /*
  Copyright (c) 2013 [ninth avenue media, LLC] (mailto: paul.smith.iv@ninthavenuemedia.com)
 
@@ -27,8 +26,6 @@ Ext.define('nineam.localization.controls.Date', {
      * @public
      */
     refresh: function() {
-        console.log('Date.refresh()');
-
         var today = Ext.Date.format(new Date(), this.format);
         if (this.showToday) {
             this.todayBtn.setText(Ext.String.format(this.todayText, today));
