@@ -19,33 +19,75 @@ Ext.define('nineam.localization.delegate.LocaleDelegate', {
         'Ext.Ajax'
     ],
 
+    /**
+     * Success method to call when loading locale file
+     *
+     * @private
+     */
+    success: {},
+
+    /**
+     * Fault method to call when loading locale file
+     * @private
+     */
+    failure: {},
+
+    /**
+     * Scope to execute success/failure method within
+     *
+     * @private
+     */
+    scope: '',
+
+    /**
+     * Constructor
+     *
+     * @param {Function} success
+     * @param {Function} failure
+     * @param {Object} scope
+     */
     constructor: function(success, failure, scope) {
         this.callParent(arguments);
+console.log('success: ' + success)
+        this.success = success;
+        this.failure = failure;
+        this.scope = scope;
+    },
 
-        //private
-        var _success = success;
-        var _failure = failure;
-        var _scope = scope;
+    /**
+     * Load locale file at specified url
+     *
+     * @public
+     * @param {String} url - url of locale file to load
+     */
+    loadPropertiesFile: function(url) {
+        if(!this.success || !this.scope)
+            return;
 
-        function ajaxSuccess(response) {
-            response = Ext.JSON.decode(response.responseText);
-            _success.call(_scope, response);
-        }
+        var req = Ext.Ajax.request({
+            url: url,
+            success: this.ajaxSuccess,
+            failure: this.ajaxFailure,
+            scope: this
+        })
+    },
 
-        function ajaxFailure() {
-            //TODO
-        }
+    /**
+     * Ajax success handler
+     *
+     * @private
+     * @param {String} response
+     */
+    ajaxSuccess: function(response) {
+        this.success.call(this.scope, response.responseText);
+    },
 
-        //public
-        this.loadPropertiesFile = function(url) {
-            if(!_success || !_scope)
-                return;
-
-            var req = Ext.Ajax.request({
-                url: url,
-                success: ajaxSuccess,
-                failure: ajaxFailure
-            })
-        }
+    /**
+     * Ajax failure handler
+     *
+     * @private
+     */
+    ajaxFailure: function() {
+        //TODO
     }
 });

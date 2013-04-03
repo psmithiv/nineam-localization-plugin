@@ -22,6 +22,6 @@ Ext.define('nineam.localization.model.LocaleModel-ExtJS', {
         {name: 'label', type: 'string'},
         {name: 'url', type: 'string'},
         {name: 'frameworkUrl', type: 'string'},
-        {name: 'propertiesClazz', type: 'object'}
+        {name: 'propertiesClass', type: 'object'}
     ]
 });

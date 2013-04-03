@@ -49,8 +49,8 @@ Ext.application({
 
         var locales = Ext.create('nineam.localization.store.LocalesStore', {
             data: [
-                {id: 'en_us', label: 'English', url: '/ext/ext/locale/ext-lang-en.js', propertiesClazz: 'Ext.locales.en.Global'},
-                {id: 'es_us', label: 'Spanish', url: '/ext/ext/locale/ext-lang-es.js', propertiesClazz: 'Ext.locales.es.Global'}
+                {id: 'en_us', label: 'English', url: '/ext/ext/locale/ext-lang-en.js', propertiesClass: 'Ext.locales.en.Global'},
+                {id: 'es_us', label: 'Spanish', url: '/ext/ext/locale/ext-lang-es.js', propertiesClass: 'Ext.locales.es.Global'}
             ]
         });
 

@@ -26,12 +26,16 @@ Ext.define('nineam.localization.LocalePlugin', {
 
     config: {
         /**
-         * {String} method - Setter method to call on client component when changing locales
+         * {String} method - Method to call on client component when changing locales
+         *
+         * @public
          */
         method: "",
 
         /**
          * {String} key - The key in the locale properties file that maps to the label value.
+         *
+         * @public
          */
         key: ""
     },
@@ -43,6 +47,7 @@ Ext.define('nineam.localization.LocalePlugin', {
         var cm = Ext.create('nineam.localization.model.ClientModel', {
             client: client, method: this.getMethod(), key: this.getKey()
         });
+
         nineam.localization.LocaleManager.registerClient(cm);
     }
 });
