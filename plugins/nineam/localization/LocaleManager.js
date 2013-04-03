@@ -163,6 +163,7 @@ Ext.define('nineam.localization.LocaleManager', {
         script.innerHTML = result;
         head.appendChild(script);
 
+        //TODO: For some unknown reason,
         var me = this;
         setTimeout(function() {
             //instantiate properties class
