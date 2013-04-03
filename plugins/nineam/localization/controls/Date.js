@@ -45,4 +45,4 @@ Ext.define('nineam.localization.controls.Date', {
         prevEl.setToolTip('asdfasdfasdf');
         */
     }
-})
+});

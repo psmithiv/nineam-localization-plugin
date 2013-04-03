@@ -123,7 +123,10 @@ Ext.define('nineam.localization.LocaleManager', {
      * @return {String}
      */
     getPersistedLocale: function() {
-        return 'en_us'; //Ext.util.Cookies.get('locale');
+        //TODO: Fix me
+        //Ext.util.Cookies.get('locale');
+
+        return 'en_us';
     },
 
     /**

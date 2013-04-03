@@ -48,7 +48,7 @@ Ext.define('nineam.localization.delegate.LocaleDelegate', {
      */
     constructor: function(success, failure, scope) {
         this.callParent(arguments);
-console.log('success: ' + success)
+
         this.success = success;
         this.failure = failure;
         this.scope = scope;
@@ -64,12 +64,12 @@ console.log('success: ' + success)
         if(!this.success || !this.scope)
             return;
 
-        var req = Ext.Ajax.request({
+        Ext.Ajax.request({
             url: url,
             success: this.ajaxSuccess,
             failure: this.ajaxFailure,
             scope: this
-        })
+        });
     },
 
     /**
@@ -88,6 +88,6 @@ console.log('success: ' + success)
      * @private
      */
     ajaxFailure: function() {
-        //TODO
+        //TODO: Implement fault handling
     }
 });
