@@ -18,6 +18,35 @@
 /**
  * Manager class to handle loading of locale properties
  * files/switching locales/updating registered components.
+ *
+ *
+ * Configuring the plugin:
+ *     init(ExtJS)/launch(Touch): function() {
+ *          var lm = nineam.localization.LocaleManager;
+ *          lm.addListener(nineam.localization.event.LocaleEvent.LOCALES_CHANGED, this.localesChangedEventHandler, this);
+ *          lm.addListener(nineam.localization.event.LocaleEvent.LOCALE_CHANGED, this.localeChangedEventHandler, this);
+ *          lm.addListener(nineam.localization.event.LocaleEvent.INITIALIZED, this.localeManagerInitializedEventHandler, this);
+ *
+ *          var locales = Ext.create('nineam.localization.store.LocalesStore', {
+ *              data: [
+ *                  {id: 'en_us', label: 'English', url: 'locale/ext-lang-en.js', propertiesClass: 'Ext.locales.en.Global'},
+ *                  {id: 'es_us', label: 'Spanish', url: 'locale/ext-lang-es.js', propertiesClass: 'Ext.locales.es.Global'}
+ *              ]
+ *          });
+ *
+ *          lm.setLocales(locales);
+ *
+ *          var locale = lm.getPersistedLocale();
+ *          lm.setLocale(locale);
+ *     }
+ *
+ * Localizing a component:
+ *      {
+ *          xtype: 'label',
+ *          plugins: [
+ *              { ptype: 'localization', method: 'setText', key: 'title' }
+ *          ]
+ *      }
  */
 Ext.define('nineam.localization.LocaleManager', {
     singleton: true,

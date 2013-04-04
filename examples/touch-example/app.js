@@ -40,18 +40,6 @@ Ext.application({
         '1496x2048': 'resources/startup/1496x2048.png'
     },
 
-    localesChangedEventHandler: function(event) {
-        console.log('STATUS: LocaleManager - LOCALES_CHANGED');
-    },
-
-    localeChangedEventHandler: function(event) {
-        console.log('STATUS: LocaleManager - LOCALE_CHANGED');
-    },
-
-    localeManagerInitializedEventHandler: function(event) {
-        console.log('STATUS: LocaleManager - INITIALIZED');
-    },
-
     launch: function() {
         //Configure locale manager
         var lm = nineam.localization.LocaleManager;
@@ -77,6 +65,18 @@ Ext.application({
 
         // Initialize the main view
         Ext.Viewport.add(Ext.create('nineam-localization-plugin-touch.view.Main'));
+    },
+
+    localesChangedEventHandler: function(event) {
+        console.log('STATUS: LocaleManager - LOCALES_CHANGED');
+    },
+
+    localeChangedEventHandler: function(event) {
+        console.log('STATUS: LocaleManager - LOCALE_CHANGED');
+    },
+
+    localeManagerInitializedEventHandler: function(event) {
+        console.log('STATUS: LocaleManager - INITIALIZED');
     },
 
     onUpdated: function() {
