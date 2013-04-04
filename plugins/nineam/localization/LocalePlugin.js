@@ -51,7 +51,9 @@ Ext.define('nineam.localization.LocalePlugin', {
      */
     init: function(client) {
         var cm = Ext.create('nineam.localization.model.ClientModel', {
-            client: client, method: this.getMethod(), key: this.getKey()
+            client: client,
+            method: this.getMethod(),
+            key: this.getKey()
         });
 
         nineam.localization.LocaleManager.registerClient(cm);

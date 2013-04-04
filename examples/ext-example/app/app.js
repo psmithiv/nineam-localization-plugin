@@ -35,9 +35,6 @@ Ext.application({
 
     views: ["Main"],
 
-    stores: [
-        'nineam.localization.store.LocalesStore'
-    ],
     autoCreateViewport: true,
 
     init: function() {
@@ -57,19 +54,18 @@ Ext.application({
         lm.setLocales(locales);
 
         var locale = lm.getPersistedLocale();
-        locale = locale ? locale : 'en_us';
         lm.setLocale(locale);
     },
 
     localesChangedEventHandler: function(event) {
-        console.log('STATUS: LocaleManager - LOCALES_CHANGED');
+        //console.log('STATUS: LocaleManager - LOCALES_CHANGED');
     },
 
     localeChangedEventHandler: function(event) {
-        console.log('STATUS: LocaleManager - LOCALE_CHANGED');
+        //console.log('STATUS: LocaleManager - LOCALE_CHANGED');
     },
 
     localeManagerInitializedEventHandler: function(event) {
-        console.log('STATUS: LocaleManager - INITIALIZED')
+        //console.log('STATUS: LocaleManager - INITIALIZED')
     }
 });

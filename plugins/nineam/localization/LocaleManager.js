@@ -133,6 +133,8 @@ Ext.define('nineam.localization.LocaleManager', {
      * @param {Object} config
      */
     constructor: function(config) {
+        Ext.log({level: 'log'}, 'DEBUG: Constructing LocaleManager');
+
         this.callParent(arguments);
         this.mixins.observable.constructor.call(this, config);
     },
@@ -146,7 +148,11 @@ Ext.define('nineam.localization.LocaleManager', {
         //first load resource bundle
         var rec = this.locales.findRecord('id', this.locale);
         var fd = new nineam.localization.delegate.LocaleDelegate(this.loadPropertiesFileResultHandler, this.loadPropertiesFileFaultHandler, this);
-        fd.loadPropertiesFile(rec.get('url'));
+        var url = rec.get('url');
+
+        Ext.log({level: 'log'}, 'DEBUG: LocaleManager - Loading properties file: ' + url);
+
+        fd.loadPropertiesFile(url);
     },
 
     /**
@@ -154,6 +160,8 @@ Ext.define('nineam.localization.LocaleManager', {
      * @param {String} result
      */
     loadPropertiesFileResultHandler: function(result) {
+        Ext.log({level: 'log'}, 'DEBUG: LocaleManager - Properties file loaded: ' + this.locales.findRecord('id', this.locale).get('url'));
+
         //write locale file to dom
         var head = document.getElementsByTagName("head")[0];
         var script = document.createElement('script');
@@ -176,6 +184,7 @@ Ext.define('nineam.localization.LocaleManager', {
 
             if(!me.initialized)
             {
+                Ext.log({level: 'log'}, 'DEBUG: LocaleManager - Locale Manager Initialized');
                 me.initialized = true;
                 me.fireEvent(nineam.localization.event.LocaleEvent.INITIALIZED, {});
             }
@@ -186,7 +195,7 @@ Ext.define('nineam.localization.LocaleManager', {
      * @private
      */
     loadPropertiesFileFaultHandler: function() {
-
+        Ext.log({level: 'error'}, 'ERROR: LocaleManager - Failure loading properties file');
     },
 
     /**
@@ -195,6 +204,7 @@ Ext.define('nineam.localization.LocaleManager', {
      * @private
      */
     updateClients: function() {
+        Ext.log({level: 'log'}, 'DEBUG: LocaleManager - Updating Clients')
         var len = this.clients.length-1;
         for(var i=len; i>-1; i--) {
             this.updateClient(this.clients[i]);
@@ -225,7 +235,7 @@ Ext.define('nineam.localization.LocaleManager', {
             }
             client[method].call(client, prop);
         } catch(e) {
-            console.log('!!! error: ' + e);
+            Ext.log({level: 'error'}, 'ERROR: LocaleManager - Error updating client [client: ' + client.getId() + ', method: ' + method + ', key: ' + key + ']');
         }
     },
 
@@ -235,6 +245,8 @@ Ext.define('nineam.localization.LocaleManager', {
      * @param {nineam.localization.model.ClientModel} clientModel - Model object representing component to localize
      */
     registerClient: function(clientModel) {
+        Ext.log({level: 'log'}, 'DEBUG: LocaleManager - Registering client component [client: ' + clientModel.get('client').getId() + ', method: ' + clientModel.get('method') + ', key: ' + clientModel.get('key') + ']');
+
         this.clients.push(clientModel);
 
         if(this.properties)
