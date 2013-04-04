@@ -31,14 +31,14 @@ Ext.define('nineam.localization.LocalePlugin', {
         /**
          * Method to call on component when locale chagnes.
          *
-         * @cfg {String} method - Method to call on client component when changing locales
+         * @cfg {String} method
          */
         method: "",
 
         /**
          * Key to use to lookup value on locale properties class.
          *
-         * @cfg {String} key - The key in the locale properties file that maps to the label value.
+         * @cfg {String} key
          */
         key: ""
     },
