@@ -14,6 +14,13 @@
  You should have received a copy of the GNU General Public License
  along with nineam-localization-plugin.  If not, see <http://www.gnu.org/licenses/>.
 */
+
+/**
+ * Store containing a list of LocaleModel objects.
+ *
+ * Note: Based on the current framework version (ext vs. touch)
+ * this class instantiates the proper super class.
+ */
 Ext.define('nineam.localization.store.LocalesStore', {
     extend: Ext.getVersion('extjs') ? 'nineam.localization.store.LocalesStore-ExtJS' : 'nineam.localization.store.LocalesStore-Touch'
 });

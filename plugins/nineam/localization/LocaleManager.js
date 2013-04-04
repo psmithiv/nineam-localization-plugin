@@ -14,6 +14,11 @@
  You should have received a copy of the GNU General Public License
  along with nineam-localization-plugin.  If not, see <http://www.gnu.org/licenses/>.
 */
+
+/**
+ * Manager class to handle loading of locale properties
+ * files/switching locales/updating registered components.
+ */
 Ext.define('nineam.localization.LocaleManager', {
     singleton: true,
 
@@ -51,8 +56,7 @@ Ext.define('nineam.localization.LocaleManager', {
     /**
      * Get store of available LocaleModel's
      *
-     * @public
-     * @return {nineam.locale.store.LocalesStore}
+     * @return {nineam.localization.store.LocalesStore}
      */
     getLocales: function() {
         return this.locales;
@@ -61,8 +65,7 @@ Ext.define('nineam.localization.LocaleManager', {
     /**
      * Set store of available LocaleModel's
      *
-     * @public
-     * @param {nineam.localization.store.LocalesStore} value
+     * @param {nineam.localization.store.LocalesStore} value - LocalesStore used by LocaleManager
      */
     setLocales: function(value) {
         this.locales = value;
@@ -80,8 +83,7 @@ Ext.define('nineam.localization.LocaleManager', {
     /**
      * Get the id of the currently selected locale
      *
-     * @public
-     * @return {string}
+     * @return {string} - Id of currently selected locale
      */
     getLocale: function() {
         return this.locale;
@@ -90,8 +92,7 @@ Ext.define('nineam.localization.LocaleManager', {
     /**
      * Set the id of the currently locale
      *
-     * @public
-     * @param {String} value
+     * @param {String} value - Id of locale  to load
      */
     setLocale: function(value) {
         this.locale = value;
@@ -109,7 +110,6 @@ Ext.define('nineam.localization.LocaleManager', {
     /**
      * Get loaded locales object
      *
-     * @public
      * @return {Object}
      */
     getProperties: function() {
@@ -119,7 +119,6 @@ Ext.define('nineam.localization.LocaleManager', {
     /**
      * Get id of last loaded locale
      *
-     * @public
      * @return {String}
      */
     getPersistedLocale: function() {
@@ -130,8 +129,7 @@ Ext.define('nineam.localization.LocaleManager', {
     },
 
     /**
-     * Constructor
-     *
+     * @constructor
      * @param {Object} config
      */
     constructor: function(config) {
@@ -234,8 +232,7 @@ Ext.define('nineam.localization.LocaleManager', {
     /**
      * Register a client component for localization
      *
-     * @public
-     * @param {nineam.localization.model.ClientModel} clientModel
+     * @param {nineam.localization.model.ClientModel} clientModel - Model object representing component to localize
      */
     registerClient: function(clientModel) {
         this.clients.push(clientModel);

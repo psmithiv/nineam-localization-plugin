@@ -14,6 +14,11 @@
  You should have received a copy of the GNU General Public License
  along with nineam-localization-plugin.  If not, see <http://www.gnu.org/licenses/>.
 */
+
+/**
+ * ExtJS version of a model object representing the component/method to call on locale
+ * change as well as the key to use to obtain the value to pass to said method.
+ */
 Ext.define('nineam.localization.model.ClientModel-ExtJS', {
     extend: 'Ext.data.Model',
 

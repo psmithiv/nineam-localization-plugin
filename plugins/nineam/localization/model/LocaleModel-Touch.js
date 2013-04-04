@@ -14,6 +14,10 @@
  You should have received a copy of the GNU General Public License
  along with nineam-localization-plugin.  If not, see <http://www.gnu.org/licenses/>.
 */
+
+/**
+ * Touch version of a model object representing a loadable locale.
+ */
 Ext.define('nineam.localization.model.LocaleModel-Touch', {
     extend: 'Ext.data.Model',
 

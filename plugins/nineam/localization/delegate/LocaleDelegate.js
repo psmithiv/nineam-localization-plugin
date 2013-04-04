@@ -14,6 +14,10 @@
  You should have received a copy of the GNU General Public License
  along with nineam-localization-plugin.  If not, see <http://www.gnu.org/licenses/>.
 */
+
+/**
+ * Delegate class responsable for loading locale property file.
+ */
 Ext.define('nineam.localization.delegate.LocaleDelegate', {
     requires: [
         'Ext.Ajax'
@@ -57,7 +61,6 @@ Ext.define('nineam.localization.delegate.LocaleDelegate', {
     /**
      * Load locale file at specified url
      *
-     * @public
      * @param {String} url - url of locale file to load
      */
     loadPropertiesFile: function(url) {

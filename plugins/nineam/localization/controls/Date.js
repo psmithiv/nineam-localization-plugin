@@ -14,6 +14,10 @@
  You should have received a copy of the GNU General Public License
  along with nineam-localization-plugin.  If not, see <http://www.gnu.org/licenses/>.
 */
+
+ /**
+  * Patch for Ext.picker.Date to allow for updating local at runtime.
+  */
 Ext.define('nineam.localization.controls.Date', {
     override: 'Ext.picker.Date',
 
@@ -23,7 +27,6 @@ Ext.define('nineam.localization.controls.Date', {
 
     /**
      * Refresh component now that local has been
-     * @public
      */
     refresh: function() {
         var today = Ext.Date.format(new Date(), this.format);

@@ -14,6 +14,10 @@
  You should have received a copy of the GNU General Public License
  along with nineam-localization-plugin.  If not, see <http://www.gnu.org/licenses/>.
 */
+
+/**
+ * ExtJS version of a store containing a list of LocaleModel objects.
+ */
 Ext.define('nineam.localization.store.LocalesStore-ExtJS', {
     extend: 'Ext.data.Store',
 

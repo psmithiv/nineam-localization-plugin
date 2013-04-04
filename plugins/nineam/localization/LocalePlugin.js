@@ -15,6 +15,9 @@
  along with nineam-localization-plugin.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+/**
+ * ExtJS/Touch plugin used to register component with LocaleManager.
+ */
 Ext.define('nineam.localization.LocalePlugin', {
     extend: Ext.getVersion('extjs') ? 'Ext.AbstractPlugin' : 'Ext.Component',
     alias: 'plugin.localization',
@@ -26,22 +29,25 @@ Ext.define('nineam.localization.LocalePlugin', {
 
     config: {
         /**
-         * {String} method - Method to call on client component when changing locales
+         * Method to call on component when locale chagnes.
          *
-         * @public
+         * @cfg {String} method - Method to call on client component when changing locales
          */
         method: "",
 
         /**
-         * {String} key - The key in the locale properties file that maps to the label value.
+         * Key to use to lookup value on locale properties class.
          *
-         * @public
+         * @cfg {String} key - The key in the locale properties file that maps to the label value.
          */
         key: ""
     },
 
     /**
-     * @override
+     * Init method called by plugin framework when a component gets instantiated.
+     * Responsible for registering client with LocaleManager.
+     *
+     * @param {Ext.Component} client - Component to register with LocaleManager for localization.
      */
     init: function(client) {
         var cm = Ext.create('nineam.localization.model.ClientModel', {
