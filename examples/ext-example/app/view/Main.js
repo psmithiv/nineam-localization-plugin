@@ -77,7 +77,7 @@ Ext.define("nineam-localization-plugin-ext.view.Main", {
         items: [{
             xtype: 'label',
             width: 160,
-            text: 'Calender/Custom Refresh:'
+            text: 'Calender (Custom Method):'
         },{
             xtype: 'datepicker',
             plugins: [

@@ -100,7 +100,8 @@ Ext.onReady(function() {
         monthYearText: 'Seleccione un mes (Control+Up/Down para desplazar el año)',
         todayTip: "{0} (Barra espaciadora)",
         format: "d/m/Y",
-        startDay: 1
+        startDay: 1,
+        ariaTitle: 'Selector de fecha: {0}'
     });
 
     Ext.define("Ext.locale.es.picker.Month", {

@@ -264,7 +264,7 @@ Ext.define('nineam.localization.LocaleManager', {
             }
             client[method].call(client, prop);
         } catch(e) {
-            Ext.log({level: 'error'}, 'ERROR: LocaleManager - Error updating client [client: ' + client.getId() + ', method: ' + method + ', key: ' + key + ']');
+            Ext.log({level: 'error'}, 'ERROR: LocaleManager - Error updating client [client: ' + client.getId() + ', method: ' + method + ', key: ' + key + '] - error: ' + e);
         }
     },
 
