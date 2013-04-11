@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js">/*
+ Copyright (c) 2013 [ninth avenue media, LLC] (mailto: paul.smith.iv@ninthavenuemedia.com)
+
+ nineam-localization-plugin is free software: you can redistribute it and/or modify
+ it under the terms of the GNU General Public License as published by
+ the Free Software Foundation, either version 3 of the License, or
+ (at your option) any later version.
+
+ nineam-localization-plugin is distributed in the hope that it will be useful,
+ but WITHOUT ANY WARRANTY; without even the implied warranty of
+ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ GNU General Public License for more details.
+
+ You should have received a copy of the GNU General Public License
+ along with nineam-localization-plugin.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
+*/
+
+<span id='nineam-localization-event-LocaleEvent'>/**
+</span> * Locale event object w/ event names
+ */
+Ext.define('nineam.localization.event.LocaleEvent', {
+    statics: {
+<span id='nineam-localization-event-LocaleEvent-static-event-INITIALIZED'>        /**
+</span>         * The LocaleManager has loaded it's first locale file and is now initialized.
+         *
+         * @event
+         */
+        INITIALIZED: 'nineam.localization.event.LocaleEvent.INITIALIZED',
+
+<span id='nineam-localization-event-LocaleEvent-static-event-LOCALES_CHANGED'>        /**
+</span>         * The current list of available locales has changed.
+         *
+         * @event
+         */
+        LOCALES_CHANGED: 'nineam.localization.event.LocaleEvent.LOCALES_CHANGED',
+
+<span id='nineam-localization-event-LocaleEvent-static-event-LOCALE_CHANGED'>        /**
+</span>         * The currently selected locale has changed.
+         *
+         * @event
+         */
+        LOCALE_CHANGED: 'nineam.localization.event.LocaleEvent.LOCALE_CHANGED'
+    }
+});</pre>
+</body>
+</html>

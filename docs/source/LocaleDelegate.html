@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js">/*
+ Copyright (c) 2013 [ninth avenue media, LLC] (mailto: paul.smith.iv@ninthavenuemedia.com)
+
+ nineam-localization-plugin is free software: you can redistribute it and/or modify
+ it under the terms of the GNU General Public License as published by
+ the Free Software Foundation, either version 3 of the License, or
+ (at your option) any later version.
+
+ nineam-localization-plugin is distributed in the hope that it will be useful,
+ but WITHOUT ANY WARRANTY; without even the implied warranty of
+ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ GNU General Public License for more details.
+
+ You should have received a copy of the GNU General Public License
+ along with nineam-localization-plugin.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
+*/
+
+<span id='nineam-localization-delegate-LocaleDelegate'>/**
+</span> * Delegate class responsable for loading locale property file.
+ */
+Ext.define('nineam.localization.delegate.LocaleDelegate', {
+    requires: [
+        'Ext.Ajax'
+    ],
+
+<span id='nineam-localization-delegate-LocaleDelegate-property-success'>    /**
+</span>     * Success method to call when loading locale file
+     *
+     * @private
+     */
+    success: {},
+
+<span id='nineam-localization-delegate-LocaleDelegate-property-failure'>    /**
+</span>     * Fault method to call when loading locale file
+     * @private
+     */
+    failure: {},
+
+<span id='nineam-localization-delegate-LocaleDelegate-property-scope'>    /**
+</span>     * Scope to execute success/failure method within
+     *
+     * @private
+     */
+    scope: '',
+
+<span id='nineam-localization-delegate-LocaleDelegate-method-constructor'>    /**
+</span>     * Constructor
+     *
+     * @param {Function} success
+     * @param {Function} failure
+     * @param {Object} scope
+     */
+    constructor: function(success, failure, scope) {
+        this.callParent(arguments);
+
+        this.success = success;
+        this.failure = failure;
+        this.scope = scope;
+    },
+
+<span id='nineam-localization-delegate-LocaleDelegate-method-loadPropertiesFile'>    /**
+</span>     * Load locale file at specified url
+     *
+     * @param {String} url - url of locale file to load
+     */
+    loadPropertiesFile: function(url) {
+        if(!this.success || !this.scope)
+            return;
+
+        Ext.Ajax.request({
+            url: url,
+            success: this.ajaxSuccess,
+            failure: this.ajaxFailure,
+            scope: this
+        });
+    },
+
+<span id='nineam-localization-delegate-LocaleDelegate-method-ajaxSuccess'>    /**
+</span>     * Ajax success handler
+     *
+     * @private
+     * @param {String} response
+     */
+    ajaxSuccess: function(response) {
+        this.success.call(this.scope, response.responseText);
+    },
+
+<span id='nineam-localization-delegate-LocaleDelegate-method-ajaxFailure'>    /**
+</span>     * Ajax failure handler
+     *
+     * @private
+     */
+    ajaxFailure: function() {
+        //TODO: Implement fault handling
+    }
+});</pre>
+</body>
+</html>
