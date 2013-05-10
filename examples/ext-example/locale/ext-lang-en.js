@@ -68,6 +68,7 @@ Ext.onReady(function() {
         Ext.Date.parseCodes.S.s = "(?:st|nd|rd|th)";
     }
 
+
     if (Ext.MessageBox) {
         Ext.MessageBox.buttonText = {
             ok: "OK",
@@ -76,7 +77,6 @@ Ext.onReady(function() {
             no: "No"
         };
     }
-
     if (exists('Ext.util.Format')) {
         Ext.apply(Ext.util.Format, {
             thousandSeparator: ',',
