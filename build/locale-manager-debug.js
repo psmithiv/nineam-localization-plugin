@@ -19,24 +19,7 @@ Ext.define('nineam.localization.model.ClientModel-Touch', {
             {name: 'key', type: 'string'}
         ]
     }
-});/*
- Copyright (c) 2013 [ninth avenue media, LLC] (mailto: paul.smith.iv@ninthavenuemedia.com)
-
- nineam-localization-plugin is free software: you can redistribute it and/or modify
- it under the terms of the GNU General Public License as published by
- the Free Software Foundation, either version 3 of the License, or
- (at your option) any later version.
-
- nineam-localization-plugin is distributed in the hope that it will be useful,
- but WITHOUT ANY WARRANTY; without even the implied warranty of
- MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- GNU General Public License for more details.
-
- You should have received a copy of the GNU General Public License
- along with nineam-localization-plugin.  If not, see <http://www.gnu.org/licenses/>.
-*/
-
-/**
+});/**
  * ExtJS version of a model object representing the component/method to call on locale
  * change as well as the key to use to obtain the value to pass to said method.
  */
@@ -48,24 +31,7 @@ Ext.define('nineam.localization.model.ClientModel-ExtJS', {
         {name: 'method', type: 'string'},
         {name: 'key', type: 'string'}
     ]
-});/*
- Copyright (c) 2013 [ninth avenue media, LLC] (mailto: paul.smith.iv@ninthavenuemedia.com)
-
- nineam-localization-plugin is free software: you can redistribute it and/or modify
- it under the terms of the GNU General Public License as published by
- the Free Software Foundation, either version 3 of the License, or
- (at your option) any later version.
-
- nineam-localization-plugin is distributed in the hope that it will be useful,
- but WITHOUT ANY WARRANTY; without even the implied warranty of
- MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- GNU General Public License for more details.
-
- You should have received a copy of the GNU General Public License
- along with nineam-localization-plugin.  If not, see <http://www.gnu.org/licenses/>.
-*/
-
-/**
+});/**
  * Model object representing the component/method to call on locale
  * change as well as the key to use to obtain the value to pass to said method.
  *
@@ -74,24 +40,7 @@ Ext.define('nineam.localization.model.ClientModel-ExtJS', {
  */
 Ext.define('nineam.localization.model.ClientModel', {
     extend: Ext.getVersion('extjs') ? 'nineam.localization.model.ClientModel-ExtJS' : 'nineam.localization.model.ClientModel-Touch'
-});/*
- Copyright (c) 2013 [ninth avenue media, LLC] (mailto: paul.smith.iv@ninthavenuemedia.com)
-
- nineam-localization-plugin is free software: you can redistribute it and/or modify
- it under the terms of the GNU General Public License as published by
- the Free Software Foundation, either version 3 of the License, or
- (at your option) any later version.
-
- nineam-localization-plugin is distributed in the hope that it will be useful,
- but WITHOUT ANY WARRANTY; without even the implied warranty of
- MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- GNU General Public License for more details.
-
- You should have received a copy of the GNU General Public License
- along with nineam-localization-plugin.  If not, see <http://www.gnu.org/licenses/>.
-*/
-
-/**
+});/**
  * Touch version of a model object representing a loadable locale.
  */
 Ext.define('nineam.localization.model.LocaleModel-Touch', {
@@ -105,24 +54,7 @@ Ext.define('nineam.localization.model.LocaleModel-Touch', {
             {name: 'propertiesClass', type: 'string'}
         ]
     }
-});/*
- Copyright (c) 2013 [ninth avenue media, LLC] (mailto: paul.smith.iv@ninthavenuemedia.com)
-
- nineam-localization-plugin is free software: you can redistribute it and/or modify
- it under the terms of the GNU General Public License as published by
- the Free Software Foundation, either version 3 of the License, or
- (at your option) any later version.
-
- nineam-localization-plugin is distributed in the hope that it will be useful,
- but WITHOUT ANY WARRANTY; without even the implied warranty of
- MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- GNU General Public License for more details.
-
- You should have received a copy of the GNU General Public License
- along with nineam-localization-plugin.  If not, see <http://www.gnu.org/licenses/>.
-*/
-
-/**
+});/**
  * ExtJS version of a model object representing a loadable locale.
  */
 Ext.define('nineam.localization.model.LocaleModel-ExtJS', {
@@ -135,24 +67,7 @@ Ext.define('nineam.localization.model.LocaleModel-ExtJS', {
         {name: 'frameworkUrl', type: 'string'},
         {name: 'propertiesClass', type: 'object'}
     ]
-});/*
- Copyright (c) 2013 [ninth avenue media, LLC] (mailto: paul.smith.iv@ninthavenuemedia.com)
-
- nineam-localization-plugin is free software: you can redistribute it and/or modify
- it under the terms of the GNU General Public License as published by
- the Free Software Foundation, either version 3 of the License, or
- (at your option) any later version.
-
- nineam-localization-plugin is distributed in the hope that it will be useful,
- but WITHOUT ANY WARRANTY; without even the implied warranty of
- MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- GNU General Public License for more details.
-
- You should have received a copy of the GNU General Public License
- along with nineam-localization-plugin.  If not, see <http://www.gnu.org/licenses/>.
-*/
-
-/**
+});/**
  * Model object representing a loadable locale.
  *
  * Note: Based on the current framework version (ext vs. touch)
@@ -160,24 +75,7 @@ Ext.define('nineam.localization.model.LocaleModel-ExtJS', {
  */
 Ext.define('nineam.localization.model.LocaleModel', {
     extend: Ext.getVersion('extjs') ? 'nineam.localization.model.LocaleModel-ExtJS' : 'nineam.localization.model.LocaleModel-Touch'
-});/*
- Copyright (c) 2013 [ninth avenue media, LLC] (mailto: paul.smith.iv@ninthavenuemedia.com)
-
- nineam-localization-plugin is free software: you can redistribute it and/or modify
- it under the terms of the GNU General Public License as published by
- the Free Software Foundation, either version 3 of the License, or
- (at your option) any later version.
-
- nineam-localization-plugin is distributed in the hope that it will be useful,
- but WITHOUT ANY WARRANTY; without even the implied warranty of
- MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- GNU General Public License for more details.
-
- You should have received a copy of the GNU General Public License
- along with nineam-localization-plugin.  If not, see <http://www.gnu.org/licenses/>.
-*/
-
-/**
+});/**
  * Touch version of a store containing a list of LocaleModel objects.
  */
 Ext.define('nineam.localization.store.LocalesStore-Touch', {
@@ -200,24 +98,7 @@ Ext.define('nineam.localization.store.LocalesStore-Touch', {
             }
         }
     }
-});/*
- Copyright (c) 2013 [ninth avenue media, LLC] (mailto: paul.smith.iv@ninthavenuemedia.com)
-
- nineam-localization-plugin is free software: you can redistribute it and/or modify
- it under the terms of the GNU General Public License as published by
- the Free Software Foundation, either version 3 of the License, or
- (at your option) any later version.
-
- nineam-localization-plugin is distributed in the hope that it will be useful,
- but WITHOUT ANY WARRANTY; without even the implied warranty of
- MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- GNU General Public License for more details.
-
- You should have received a copy of the GNU General Public License
- along with nineam-localization-plugin.  If not, see <http://www.gnu.org/licenses/>.
-*/
-
-/**
+});/**
  * ExtJS version of a store containing a list of LocaleModel objects.
  */
 Ext.define('nineam.localization.store.LocalesStore-ExtJS', {
@@ -238,24 +119,7 @@ Ext.define('nineam.localization.store.LocalesStore-ExtJS', {
             root: ''
         }
     }
-});/*
- Copyright (c) 2013 [ninth avenue media, LLC] (mailto: paul.smith.iv@ninthavenuemedia.com)
-
- nineam-localization-plugin is free software: you can redistribute it and/or modify
- it under the terms of the GNU General Public License as published by
- the Free Software Foundation, either version 3 of the License, or
- (at your option) any later version.
-
- nineam-localization-plugin is distributed in the hope that it will be useful,
- but WITHOUT ANY WARRANTY; without even the implied warranty of
- MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- GNU General Public License for more details.
-
- You should have received a copy of the GNU General Public License
- along with nineam-localization-plugin.  If not, see <http://www.gnu.org/licenses/>.
-*/
-
-/**
+});/**
  * Store containing a list of LocaleModel objects.
  *
  * Note: Based on the current framework version (ext vs. touch)
@@ -263,24 +127,7 @@ Ext.define('nineam.localization.store.LocalesStore-ExtJS', {
  */
 Ext.define('nineam.localization.store.LocalesStore', {
     extend: Ext.getVersion('extjs') ? 'nineam.localization.store.LocalesStore-ExtJS' : 'nineam.localization.store.LocalesStore-Touch'
-}); /*
- Copyright (c) 2013 [ninth avenue media, LLC] (mailto: paul.smith.iv@ninthavenuemedia.com)
-
- nineam-localization-plugin is free software: you can redistribute it and/or modify
- it under the terms of the GNU General Public License as published by
- the Free Software Foundation, either version 3 of the License, or
- (at your option) any later version.
-
- nineam-localization-plugin is distributed in the hope that it will be useful,
- but WITHOUT ANY WARRANTY; without even the implied warranty of
- MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- GNU General Public License for more details.
-
- You should have received a copy of the GNU General Public License
- along with nineam-localization-plugin.  If not, see <http://www.gnu.org/licenses/>.
-*/
-
- /**
+}); /**
   * Patch for Ext.picker.Date to allow for updating local at runtime.
   */
 Ext.define('nineam.localization.controls.Date', {
@@ -360,24 +207,7 @@ Ext.define('nineam.localization.controls.Date', {
         this.picker = null;
         this.hideMonthPicker(true);
     }
-});/*
- Copyright (c) 2013 [ninth avenue media, LLC] (mailto: paul.smith.iv@ninthavenuemedia.com)
-
- nineam-localization-plugin is free software: you can redistribute it and/or modify
- it under the terms of the GNU General Public License as published by
- the Free Software Foundation, either version 3 of the License, or
- (at your option) any later version.
-
- nineam-localization-plugin is distributed in the hope that it will be useful,
- but WITHOUT ANY WARRANTY; without even the implied warranty of
- MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- GNU General Public License for more details.
-
- You should have received a copy of the GNU General Public License
- along with nineam-localization-plugin.  If not, see <http://www.gnu.org/licenses/>.
-*/
-
-/**
+});/**
  * Delegate class responsable for loading locale property file.
  */
 Ext.define('nineam.localization.delegate.LocaleDelegate', {
@@ -455,24 +285,7 @@ Ext.define('nineam.localization.delegate.LocaleDelegate', {
     ajaxFailure: function() {
         //TODO: Implement fault handling
     }
-});/*
- Copyright (c) 2013 [ninth avenue media, LLC] (mailto: paul.smith.iv@ninthavenuemedia.com)
-
- nineam-localization-plugin is free software: you can redistribute it and/or modify
- it under the terms of the GNU General Public License as published by
- the Free Software Foundation, either version 3 of the License, or
- (at your option) any later version.
-
- nineam-localization-plugin is distributed in the hope that it will be useful,
- but WITHOUT ANY WARRANTY; without even the implied warranty of
- MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- GNU General Public License for more details.
-
- You should have received a copy of the GNU General Public License
- along with nineam-localization-plugin.  If not, see <http://www.gnu.org/licenses/>.
-*/
-
-/**
+});/**
  * Locale event object w/ event names
  */
 Ext.define('nineam.localization.event.LocaleEvent', {
@@ -498,24 +311,7 @@ Ext.define('nineam.localization.event.LocaleEvent', {
          */
         LOCALE_CHANGED: 'nineam.localization.event.LocaleEvent.LOCALE_CHANGED'
     }
-});/*
- Copyright (c) 2013 [ninth avenue media, LLC] (mailto: paul.smith.iv@ninthavenuemedia.com)
-
- nineam-localization-plugin is free software: you can redistribute it and/or modify
- it under the terms of the GNU General Public License as published by
- the Free Software Foundation, either version 3 of the License, or
- (at your option) any later version.
-
- nineam-localization-plugin is distributed in the hope that it will be useful,
- but WITHOUT ANY WARRANTY; without even the implied warranty of
- MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- GNU General Public License for more details.
-
- You should have received a copy of the GNU General Public License
- along with nineam-localization-plugin.  If not, see <http://www.gnu.org/licenses/>.
-*/
-
-/**
+});/**
  * Manager class to handle loading of locale properties
  * files/switching locales/updating registered components.
  *
@@ -781,24 +577,7 @@ Ext.define('nineam.localization.LocaleManager', {
         if(this.properties)
             this.updateClient(clientModel);
     }
-});/*
- Copyright (c) 2013 [ninth avenue media, LLC] (mailto: paul.smith.iv@ninthavenuemedia.com)
-
- nineam-localization-plugin is free software: you can redistribute it and/or modify
- it under the terms of the GNU General Public License as published by
- the Free Software Foundation, either version 3 of the License, or
- (at your option) any later version.
-
- nineam-localization-plugin is distributed in the hope that it will be useful,
- but WITHOUT ANY WARRANTY; without even the implied warranty of
- MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- GNU General Public License for more details.
-
- You should have received a copy of the GNU General Public License
- along with nineam-localization-plugin.  If not, see <http://www.gnu.org/licenses/>.
-*/
-
-/**
+});/**
  * ExtJS/Touch plugin used to register component with LocaleManager.
  */
 Ext.define('nineam.localization.LocalePlugin', {
