@@ -1,1 +1,1 @@
-//Place ExtJS framework here.
+//Place ExtJS 4.x+ framework here.
