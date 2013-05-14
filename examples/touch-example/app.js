@@ -1,10 +1,8 @@
-//<debug>
 Ext.Loader.setPath({
     'Ext': 'touch/src',
     'nineam-localization-plugin-touch': 'app',
     'nineam': '/plugins/nineam'
 });
-//</debug>
 
 Ext.application({
     name: 'nineam-localization-plugin-touch',
