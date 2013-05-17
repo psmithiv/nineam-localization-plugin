@@ -120,12 +120,13 @@ Ext.define('nineam.localization.LocaleManager', {
     properties: null,
 
     /**
-     * Get loaded locales object
+     * Get value from locale file
      *
+     * @param {String}  key - Key to use to look up value in locale file
      * @return {Object}
      */
-    getProperties: function() {
-        return this.properties;
+    getProperty: function(key) {
+        return eval('this.properties.' + key);;
     },
 
     /**
@@ -134,7 +135,7 @@ Ext.define('nineam.localization.LocaleManager', {
      * @return {String}
      */
     getPersistedLocale: function() {
-        //TODO: Fix me
+        //TODO: Fix me - No Ext.util.Cookies in ST2
         //Ext.util.Cookies.get('locale');
 
         return 'en_us';
@@ -181,7 +182,7 @@ Ext.define('nineam.localization.LocaleManager', {
         script.innerHTML = result;
         head.appendChild(script);
 
-        //TODO: For some unknown reason,
+        //TODO: Fix Me - It seems that ST2 contains a delay before the onReady method on the locale file is fired.
         var me = this;
         setTimeout(function() {
             //instantiate properties class
@@ -236,11 +237,12 @@ Ext.define('nineam.localization.LocaleManager', {
         var method = clientModel.get('method');
         var key = clientModel.get('key');
 
-        //call method on comp with value from resource bundle (if key specified)
+        //if key specified: call method on comp using value from resource bundle.
+        //otherwise, pass entire properties object
         try {
             var prop;
             if(key) {
-                var global = eval('this.properties.' + key);
+                var global = this.getProperty(key);
                 prop = global ? global : eval('client.' + key);
             } else {
                 prop = this.properties;
