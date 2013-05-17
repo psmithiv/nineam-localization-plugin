@@ -4,28 +4,28 @@
 
 	<!-- Build ===================================================== -->
 	<target
-			name="build"
-			depends="init, concatenate, minify, docs"
-			description="Builds debug and deployment versions of the framework and JSDuck generated docs."
-			>
+		name="build"
+		depends="init, concatenate, minify, docs"
+		description="Builds debug and deployment versions of the framework and JSDuck generated docs."
+		>
 
 		<echo message="Build Complete." />
 	</target>
 
 	<target
-			name="buildWithoutDocs"
-			depends="init, concatenate, minify"
-			description="Builds debug and deployment versions of the framework."
-			>
+		name="buildWithoutDocs"
+		depends="init, concatenate, minify"
+		description="Builds debug and deployment versions of the framework."
+		>
 
 		<echo message="Build Complete." />
 	</target>
 
 	<!-- Init ===================================================== -->
 	<target
-			name="init"
-			description="Cleans the deploy  directory."
-			>
+		name="init"
+		description="Cleans the deploy  directory."
+		>
 
 		<echo message="Deleting build directory..." />
 		<delete dir="build" failOnError="false" includeEmptyDirs="true" />
@@ -38,9 +38,9 @@
 
 	<!-- Concatenate ===================================================== -->
 	<target
-			name="concatenate"
-			description="Builds debug and deployment versions of the framework."
-			>
+		name="concatenate"
+		description="Builds debug and deployment versions of the framework."
+		>
 
 		<echo message="Concatenating JavaScript files..." />
 		<concat destfile="build/${filename.debug}" encoding="UTF-8" outputencoding="UTF-8">
@@ -52,34 +52,31 @@
 			<!--</filterchain>-->
 			<filelist dir="${src.dir}">
 				<!-- NOTE: Order is important - driven by class dependencies. -->
-				<file name="nineam/localization/model/ClientModel-Touch.js" />
-				<file name="nineam/localization/model/ClientModel-ExtJS.js" />
-				<file name="nineam/localization/model/ClientModel.js" />
-
+				<file name="nineam/localization/controls/Date.js" />
+				<file name="nineam/localization/event/LocaleEvent.js" />
+				<file name="nineam/localization/delegate/LocaleDelegate.js" />
 				<file name="nineam/localization/model/LocaleModel-Touch.js" />
 				<file name="nineam/localization/model/LocaleModel-ExtJS.js" />
 				<file name="nineam/localization/model/LocaleModel.js" />
-
+				<file name="nineam/localization/model/ClientModel-Touch.js" />
+				<file name="nineam/localization/model/ClientModel-ExtJS.js" />
+				<file name="nineam/localization/model/ClientModel.js" />
 				<file name="nineam/localization/store/LocalesStore-Touch.js" />
 				<file name="nineam/localization/store/LocalesStore-ExtJS.js" />
 				<file name="nineam/localization/store/LocalesStore.js" />
-
-				<file name="nineam/localization/controls/Date.js" />
-				<file name="nineam/localization/delegate/LocaleDelegate.js" />
-				<file name="nineam/localization/event/LocaleEvent.js" />
 				<file name="nineam/localization/LocaleManager.js" />
 				<file name="nineam/localization/LocalePlugin.js" />
 			</filelist>
 		</concat>
 
-		<echo message="Concatenation Complete." />
+		<echo message="Concatenation Complete. Created ${filename.debug}" />
 	</target>
 
 	<!-- Minify ===================================================== -->
 	<target
-			name="minify"
-			description="Minifies concatenated JavaScript file."
-			>
+		name="minify"
+		description="Minifies concatenated JavaScript file."
+		>
 
 		<echo message="Minifying javascript build file...." />
 
@@ -93,14 +90,14 @@
 			<targetfile/>
 		</apply>
 
-		<echo message="Minifying Complete" />
+		<echo message="Minifying Complete. Created ${filename.deploy}" />
 	</target>
 
 	<!-- Docs ===================================================== -->
 	<target
-			name="docs"
-			description="Generates JSDuck API documentation."
-			>
+		name="docs"
+		description="Generates JSDuck API documentation."
+		>
 
 		<condition property="jsDuckExecutable" value="${jsduck.dir}/jsduck.exe">
 			<os family="windows"/>

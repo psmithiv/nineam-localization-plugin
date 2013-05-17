@@ -1,133 +1,11 @@
 /*!
-LocaleManager 0.1.0
+LocaleManager Plugin 0.1.0
 
 Copyright (c) 2013 [ninth avenue media, LLC] (mailto: paul.smith.iv@ninthavenuemedia.com)
 Open source under the [MIT License](http://en.wikipedia.org/wiki/MIT_License).
 */
 
-/**
- * Touch version of a model object representing the component/method to call on locale
- * change as well as the key to use to obtain the value to pass to said method.
- */
-Ext.define('nineam.localization.model.ClientModel-Touch', {
-    extend: 'Ext.data.Model',
-
-    config: {
-        fields: [
-            {name: 'client', type: 'object'},
-            {name: 'method', type: 'string'},
-            {name: 'key', type: 'string'}
-        ]
-    }
-});/**
- * ExtJS version of a model object representing the component/method to call on locale
- * change as well as the key to use to obtain the value to pass to said method.
- */
-Ext.define('nineam.localization.model.ClientModel-ExtJS', {
-    extend: 'Ext.data.Model',
-
-    fields: [
-        {name: 'client', type: 'object'},
-        {name: 'method', type: 'string'},
-        {name: 'key', type: 'string'}
-    ]
-});/**
- * Model object representing the component/method to call on locale
- * change as well as the key to use to obtain the value to pass to said method.
- *
- * Note: Based on the current framework version (ext vs. touch)
- * this class instantiates the proper super class.
- */
-Ext.define('nineam.localization.model.ClientModel', {
-    extend: Ext.getVersion('extjs') ? 'nineam.localization.model.ClientModel-ExtJS' : 'nineam.localization.model.ClientModel-Touch'
-});/**
- * Touch version of a model object representing a loadable locale.
- */
-Ext.define('nineam.localization.model.LocaleModel-Touch', {
-    extend: 'Ext.data.Model',
-
-    config: {
-        fields: [
-            {name: 'id', type: 'string'},
-            {name: 'label', type: 'string'},
-            {name: 'url', type: 'string'},
-            {name: 'propertiesClass', type: 'string'}
-        ]
-    }
-});/**
- * ExtJS version of a model object representing a loadable locale.
- */
-Ext.define('nineam.localization.model.LocaleModel-ExtJS', {
-    extend: 'Ext.data.Model',
-
-    fields: [
-        {name: 'id', type: 'string'},
-        {name: 'label', type: 'string'},
-        {name: 'url', type: 'string'},
-        {name: 'frameworkUrl', type: 'string'},
-        {name: 'propertiesClass', type: 'object'}
-    ]
-});/**
- * Model object representing a loadable locale.
- *
- * Note: Based on the current framework version (ext vs. touch)
- * this class instantiates the proper super class.
- */
-Ext.define('nineam.localization.model.LocaleModel', {
-    extend: Ext.getVersion('extjs') ? 'nineam.localization.model.LocaleModel-ExtJS' : 'nineam.localization.model.LocaleModel-Touch'
-});/**
- * Touch version of a store containing a list of LocaleModel objects.
- */
-Ext.define('nineam.localization.store.LocalesStore-Touch', {
-    extend: 'Ext.data.Store',
-
-    requires: [
-        'nineam.localization.model.LocaleModel'
-    ],
-
-    config: {
-        storeId: 'localesStore',
-
-        model: 'nineam.localization.model.LocaleModel',
-
-        proxy: {
-            type: 'memory',
-            reader: {
-                type: 'json',
-                root: ''
-            }
-        }
-    }
-});/**
- * ExtJS version of a store containing a list of LocaleModel objects.
- */
-Ext.define('nineam.localization.store.LocalesStore-ExtJS', {
-    extend: 'Ext.data.Store',
-
-    requires: [
-        'nineam.localization.model.LocaleModel'
-    ],
-
-    storeId: 'localesStore',
-
-    model: 'nineam.localization.model.LocaleModel',
-
-    proxy: {
-        type: 'memory',
-        reader: {
-            type: 'json',
-            root: ''
-        }
-    }
-});/**
- * Store containing a list of LocaleModel objects.
- *
- * Note: Based on the current framework version (ext vs. touch)
- * this class instantiates the proper super class.
- */
-Ext.define('nineam.localization.store.LocalesStore', {
-    extend: Ext.getVersion('extjs') ? 'nineam.localization.store.LocalesStore-ExtJS' : 'nineam.localization.store.LocalesStore-Touch'
-}); /**
+ /**
   * Patch for Ext.picker.Date to allow for updating local at runtime.
   */
 Ext.define('nineam.localization.controls.Date', {
@@ -208,6 +86,32 @@ Ext.define('nineam.localization.controls.Date', {
         this.hideMonthPicker(true);
     }
 });/**
+ * Locale event object w/ event names
+ */
+Ext.define('nineam.localization.event.LocaleEvent', {
+    statics: {
+        /**
+         * The LocaleManager has loaded it's first locale file and is now initialized.
+         *
+         * @event
+         */
+        INITIALIZED: 'nineam.localization.event.LocaleEvent.INITIALIZED',
+
+        /**
+         * The current list of available locales has changed.
+         *
+         * @event
+         */
+        LOCALES_CHANGED: 'nineam.localization.event.LocaleEvent.LOCALES_CHANGED',
+
+        /**
+         * The currently selected locale has changed.
+         *
+         * @event
+         */
+        LOCALE_CHANGED: 'nineam.localization.event.LocaleEvent.LOCALE_CHANGED'
+    }
+});/**
  * Delegate class responsable for loading locale property file.
  */
 Ext.define('nineam.localization.delegate.LocaleDelegate', {
@@ -286,31 +190,128 @@ Ext.define('nineam.localization.delegate.LocaleDelegate', {
         //TODO: Implement fault handling
     }
 });/**
- * Locale event object w/ event names
+ * Touch version of a model object representing a loadable locale.
  */
-Ext.define('nineam.localization.event.LocaleEvent', {
-    statics: {
-        /**
-         * The LocaleManager has loaded it's first locale file and is now initialized.
-         *
-         * @event
-         */
-        INITIALIZED: 'nineam.localization.event.LocaleEvent.INITIALIZED',
+Ext.define('nineam.localization.model.LocaleModel-Touch', {
+    extend: 'Ext.data.Model',
 
-        /**
-         * The current list of available locales has changed.
-         *
-         * @event
-         */
-        LOCALES_CHANGED: 'nineam.localization.event.LocaleEvent.LOCALES_CHANGED',
-
-        /**
-         * The currently selected locale has changed.
-         *
-         * @event
-         */
-        LOCALE_CHANGED: 'nineam.localization.event.LocaleEvent.LOCALE_CHANGED'
+    config: {
+        fields: [
+            {name: 'id', type: 'string'},
+            {name: 'label', type: 'string'},
+            {name: 'url', type: 'string'},
+            {name: 'propertiesClass', type: 'string'}
+        ]
     }
+});/**
+ * ExtJS version of a model object representing a loadable locale.
+ */
+Ext.define('nineam.localization.model.LocaleModel-ExtJS', {
+    extend: 'Ext.data.Model',
+
+    fields: [
+        {name: 'id', type: 'string'},
+        {name: 'label', type: 'string'},
+        {name: 'url', type: 'string'},
+        {name: 'frameworkUrl', type: 'string'},
+        {name: 'propertiesClass', type: 'object'}
+    ]
+});/**
+ * Model object representing a loadable locale.
+ *
+ * Note: Based on the current framework version (ext vs. touch)
+ * this class instantiates the proper super class.
+ */
+Ext.define('nineam.localization.model.LocaleModel', {
+//    extend: Ext.getVersion('extjs') ? 'nineam.localization.model.LocaleModel-ExtJS' : 'nineam.localization.model.LocaleModel-Touch'
+	extend: 'nineam.localization.model.LocaleModel-ExtJS'
+});/**
+ * Touch version of a model object representing the component/method to call on locale
+ * change as well as the key to use to obtain the value to pass to said method.
+ */
+Ext.define('nineam.localization.model.ClientModel-Touch', {
+    extend: 'Ext.data.Model',
+
+    config: {
+        fields: [
+            {name: 'client', type: 'object'},
+            {name: 'method', type: 'string'},
+            {name: 'key', type: 'string'}
+        ]
+    }
+});/**
+ * ExtJS version of a model object representing the component/method to call on locale
+ * change as well as the key to use to obtain the value to pass to said method.
+ */
+Ext.define('nineam.localization.model.ClientModel-ExtJS', {
+    extend: 'Ext.data.Model',
+
+    fields: [
+        {name: 'client', type: 'object'},
+        {name: 'method', type: 'string'},
+        {name: 'key', type: 'string'}
+    ]
+});/**
+ * Model object representing the component/method to call on locale
+ * change as well as the key to use to obtain the value to pass to said method.
+ *
+ * Note: Based on the current framework version (ext vs. touch)
+ * this class instantiates the proper super class.
+ */
+Ext.define('nineam.localization.model.ClientModel', {
+    extend: Ext.getVersion('extjs') ? 'nineam.localization.model.ClientModel-ExtJS' : 'nineam.localization.model.ClientModel-Touch'
+});/**
+ * Touch version of a store containing a list of LocaleModel objects.
+ */
+Ext.define('nineam.localization.store.LocalesStore-Touch', {
+    extend: 'Ext.data.Store',
+
+    requires: [
+        'nineam.localization.model.LocaleModel'
+    ],
+
+    config: {
+        storeId: 'localesStore',
+
+        model: 'nineam.localization.model.LocaleModel',
+
+        proxy: {
+            type: 'memory',
+            reader: {
+                type: 'json',
+                root: ''
+            }
+        }
+    }
+});/**
+ * ExtJS version of a store containing a list of LocaleModel objects.
+ */
+Ext.define('nineam.localization.store.LocalesStore-ExtJS', {
+    extend: 'Ext.data.Store',
+
+    requires: [
+        'nineam.localization.model.LocaleModel'
+    ],
+
+    storeId: 'localesStore',
+
+    model: 'nineam.localization.model.LocaleModel',
+
+    proxy: {
+        type: 'memory',
+        reader: {
+            type: 'json',
+            root: ''
+        }
+    }
+});/**
+ * Store containing a list of LocaleModel objects.
+ *
+ * Note: Based on the current framework version (ext vs. touch)
+ * this class instantiates the proper super class.
+ */
+Ext.define('nineam.localization.store.LocalesStore', {
+    extend: Ext.getVersion('extjs') ? 'nineam.localization.store.LocalesStore-ExtJS' : 'nineam.localization.store.LocalesStore-Touch'
 });/**
  * Manager class to handle loading of locale properties
  * files/switching locales/updating registered components.
@@ -584,7 +585,7 @@ Ext.define('nineam.localization.LocalePlugin', {
     extend: Ext.getVersion('extjs') ? 'Ext.AbstractPlugin' : 'Ext.Component',
     alias: 'plugin.localization',
 
-    required: [
+    requires: [
         'nineam.localization.LocaleManager',
         'nineam.localization.model.ClientModel'
     ],

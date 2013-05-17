@@ -5,7 +5,7 @@ Ext.define('nineam.localization.LocalePlugin', {
     extend: Ext.getVersion('extjs') ? 'Ext.AbstractPlugin' : 'Ext.Component',
     alias: 'plugin.localization',
 
-    required: [
+    requires: [
         'nineam.localization.LocaleManager',
         'nineam.localization.model.ClientModel'
     ],
