@@ -35,9 +35,9 @@ Ext.define('nineam.localization.LocaleManager', {
     singleton: true,
 
     requires: [
-        //'Ext.util.Cookies',
         'nineam.localization.event.LocaleEvent',
-        'nineam.localization.delegate.LocaleDelegate'
+        'nineam.localization.delegate.LocaleDelegate',
+        'nineam.localization.util.Persistence'
     ],
 
     mixins: {
@@ -130,15 +130,14 @@ Ext.define('nineam.localization.LocaleManager', {
     },
 
     /**
-     * Get id of last loaded locale
+     * Get id of last loaded locale. If locale is not found in locales, first locale in
+     * locales is returned.
      *
-     * @return {String}
+     * @return {String} - Defaults to first id in locales collection
      */
     getPersistedLocale: function() {
-        //TODO: Fix me - No Ext.util.Cookies in ST2
-        //Ext.util.Cookies.get('locale');
-
-        return 'en_us';
+        var locale = nineam.localization.util.Persistence.getLocale();
+        return this.locales.find('id', locale) ? locale : this.locales.getAt(0).get('id');
     },
 
     /**
@@ -191,7 +190,7 @@ Ext.define('nineam.localization.LocaleManager', {
 
             me.updateClients();
 
-            //Ext.util.Cookies.set('locale', this.locale, new Date(new Date().getTime()+(1000*60*60*24*365)));
+            nineam.localization.util.Persistence.setLocale(me.locale);
 
             me.fireEvent(nineam.localization.event.LocaleEvent.LOCALE_CHANGED, {});
 
@@ -217,7 +216,7 @@ Ext.define('nineam.localization.LocaleManager', {
      * @private
      */
     updateClients: function() {
-        Ext.log({level: 'log'}, 'DEBUG: LocaleManager - Updating Clients')
+        Ext.log({level: 'log'}, 'DEBUG: LocaleManager - Updating Clients');
         var len = this.clients.length-1;
         for(var i=len; i>-1; i--) {
             this.updateClient(this.clients[i]);
@@ -230,14 +229,15 @@ Ext.define('nineam.localization.LocaleManager', {
      * If no key is specified, the entire properties class instance is passed to the methode.
      *
      * @private
-     * @param {nineam.localization.model.ClientModel} clientModel
+     * @param {nineam.localization.model.ClientModel} clientModel - Model object representing the component to be updated
      */
     updateClient: function(clientModel) {
         var client = clientModel.get('client');
         var method = clientModel.get('method');
         var key = clientModel.get('key');
 
-        //if key specified: call method on comp using value from resource bundle.
+        //first look to locale properties for value.
+        //if key does not exist on locale properties for for key on component.
         //otherwise, pass entire properties object
         try {
             var prop;

@@ -1,5 +1,5 @@
 Ext.Loader.setConfig({
-	"nineam-localization-plugin-ext":     "app",
+	'nineam-localization-plugin-ext':     'app',
 
 	// NOTE: if using ext-dev.js the path to plugin source must be uncommented.
 	// NOTE: if using ext-all.js then comment this out.
@@ -19,7 +19,7 @@ Ext.application({
         'nineam.localization.LocalePlugin',
         'nineam.localization.model.ClientModel',
         'nineam.localization.store.LocalesStore',
-        'nineam.localization.controls.Date',
+        'nineam-localization-plugin-ext.controls.Date',
         'Ext.form.Label'
     ],
 
