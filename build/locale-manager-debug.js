@@ -6,110 +6,6 @@ Open source under the [MIT License](http://en.wikipedia.org/wiki/MIT_License).
 */
 
 /**
- * Locale event object w/ event names
- */
-Ext.define('nineam.localization.event.LocaleEvent', {
-    statics: {
-        /**
-         * The LocaleManager has loaded it's first locale file and is now initialized.
-         *
-         * @event
-         */
-        INITIALIZED: 'nineam.localization.event.LocaleEvent.INITIALIZED',
-
-        /**
-         * The current list of available locales has changed.
-         *
-         * @event
-         */
-        LOCALES_CHANGED: 'nineam.localization.event.LocaleEvent.LOCALES_CHANGED',
-
-        /**
-         * The currently selected locale has changed.
-         *
-         * @event
-         */
-        LOCALE_CHANGED: 'nineam.localization.event.LocaleEvent.LOCALE_CHANGED'
-    }
-});/**
- * Delegate class responsable for loading locale property file.
- */
-Ext.define('nineam.localization.delegate.LocaleDelegate', {
-    requires: [
-        'Ext.Ajax'
-    ],
-
-    /**
-     * Success method to call when loading locale file
-     *
-     * @private
-     */
-    success: {},
-
-    /**
-     * Fault method to call when loading locale file
-     * @private
-     */
-    failure: {},
-
-    /**
-     * Scope to execute success/failure method within
-     *
-     * @private
-     */
-    scope: '',
-
-    /**
-     * Constructor
-     *
-     * @param {Function} success
-     * @param {Function} failure
-     * @param {Object} scope
-     */
-    constructor: function(success, failure, scope) {
-        this.callParent(arguments);
-
-        this.success = success;
-        this.failure = failure;
-        this.scope = scope;
-    },
-
-    /**
-     * Load locale file at specified url
-     *
-     * @param {String} url - url of locale file to load
-     */
-    loadPropertiesFile: function(url) {
-        if(!this.success || !this.scope)
-            return;
-
-        Ext.Ajax.request({
-            url: url,
-            success: this.ajaxSuccess,
-            failure: this.ajaxFailure,
-            scope: this
-        });
-    },
-
-    /**
-     * Ajax success handler
-     *
-     * @private
-     * @param {String} response
-     */
-    ajaxSuccess: function(response) {
-        this.success.call(this.scope, response.responseText);
-    },
-
-    /**
-     * Ajax failure handler
-     *
-     * @private
-     */
-    ajaxFailure: function() {
-        //TODO: Implement fault handling
-    }
-});/**
  * Touch version of a model object representing a loadable locale.
  */
 Ext.define('nineam.localization.model.LocaleModel-Touch', {
@@ -223,6 +119,29 @@ Ext.define('nineam.localization.store.LocalesStore-ExtJS', {
             root: ''
         }
     }
+});Ext.define('nineam.localization.util.Persistence-ExtJS', {
+    extend: 'nineam.localization.util.AbstractPersistence',
+
+    requires: [
+        'Ext.util.Cookies'
+    ],
+
+    LOCALE_COOKIE_ID: 'nineam.localization.util.Persistence-ExtJS.LOCALE_COOKIE_ID',
+
+    getLocale: function() {
+        var value = Ext.util.Cookies.get(this.LOCALE_COOKIE_ID);
+        Ext.log({level: 'log'}, 'DEBUG: LocaleManager - Getting persisted locale id: ' + value);
+        return value;
+    },
+
+    setLocale: function(value) {
+        Ext.log({level: 'log'}, 'DEBUG: LocaleManager - Persisting locale id: ' + value);
+        Ext.util.Cookies.set(this.LOCALE_COOKIE_ID,
+            value, new Date(new Date().getTime()+(1000*60*60*24*365)));
+    }
+});Ext.define('nineam.localization.util.Persistence', {
+    extend: Ext.getVersion('extjs') ? 'nineam.localization.util.Persistence-ExtJS' : 'nineam.localization.util.Persistence-Touch',
+    singleton: true
 });/**
  * Store containing a list of LocaleModel objects.
  *
@@ -231,6 +150,110 @@ Ext.define('nineam.localization.store.LocalesStore-ExtJS', {
  */
 Ext.define('nineam.localization.store.LocalesStore', {
     extend: Ext.getVersion('extjs') ? 'nineam.localization.store.LocalesStore-ExtJS' : 'nineam.localization.store.LocalesStore-Touch'
+});/**
+ * Locale event object w/ event names
+ */
+Ext.define('nineam.localization.event.LocaleEvent', {
+    statics: {
+        /**
+         * The LocaleManager has loaded it's first locale file and is now initialized.
+         *
+         * @event
+         */
+        INITIALIZED: 'nineam.localization.event.LocaleEvent.INITIALIZED',
+
+        /**
+         * The current list of available locales has changed.
+         *
+         * @event
+         */
+        LOCALES_CHANGED: 'nineam.localization.event.LocaleEvent.LOCALES_CHANGED',
+
+        /**
+         * The currently selected locale has changed.
+         *
+         * @event
+         */
+        LOCALE_CHANGED: 'nineam.localization.event.LocaleEvent.LOCALE_CHANGED'
+    }
+});/**
+ * Delegate class responsable for loading locale property file.
+ */
+Ext.define('nineam.localization.delegate.LocaleDelegate', {
+    requires: [
+        'Ext.Ajax'
+    ],
+
+    /**
+     * Success method to call when loading locale file
+     *
+     * @private
+     */
+    success: {},
+
+    /**
+     * Fault method to call when loading locale file
+     * @private
+     */
+    failure: {},
+
+    /**
+     * Scope to execute success/failure method within
+     *
+     * @private
+     */
+    scope: '',
+
+    /**
+     * Constructor
+     *
+     * @param {Function} success
+     * @param {Function} failure
+     * @param {Object} scope
+     */
+    constructor: function(success, failure, scope) {
+        this.callParent(arguments);
+
+        this.success = success;
+        this.failure = failure;
+        this.scope = scope;
+    },
+
+    /**
+     * Load locale file at specified url
+     *
+     * @param {String} url - url of locale file to load
+     */
+    loadPropertiesFile: function(url) {
+        if(!this.success || !this.scope)
+            return;
+
+        Ext.Ajax.request({
+            url: url,
+            success: this.ajaxSuccess,
+            failure: this.ajaxFailure,
+            scope: this
+        });
+    },
+
+    /**
+     * Ajax success handler
+     *
+     * @private
+     * @param {String} response
+     */
+    ajaxSuccess: function(response) {
+        this.success.call(this.scope, response.responseText);
+    },
+
+    /**
+     * Ajax failure handler
+     *
+     * @private
+     */
+    ajaxFailure: function() {
+        //TODO: Implement fault handling
+    }
 });/**
  * Manager class to handle loading of locale properties
  * files/switching locales/updating registered components.
@@ -378,6 +401,12 @@ Ext.define('nineam.localization.LocaleManager', {
      * @param {Object} config
      */
     constructor: function(config) {
+        //TODO: This needs to be a more robust solution
+        //Fix discrepancies between ExtJS and ST2 logging
+        if(typeof(Ext.log) != 'function') {
+            Ext.log = function(config, message) { console.log(message) }
+        }
+
         Ext.log({level: 'log'}, 'DEBUG: Constructing LocaleManager');
 
         this.callParent(arguments);

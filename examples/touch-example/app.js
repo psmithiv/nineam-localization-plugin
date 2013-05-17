@@ -55,7 +55,6 @@ Ext.application({
         lm.setLocales(locales);
 
         var locale = lm.getPersistedLocale();
-        locale = locale ? locale : 'en_us';
         lm.setLocale(locale);
 
         // Destroy the #appLoadingIndicator element

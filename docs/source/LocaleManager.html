@@ -162,6 +162,12 @@ Ext.define('nineam.localization.LocaleManager', {
      * @param {Object} config
      */
     constructor: function(config) {
+        //TODO: This needs to be a more robust solution
+        //Fix discrepancies between ExtJS and ST2 logging
+        if(typeof(Ext.log) != 'function') {
+            Ext.log = function(config, message) { console.log(message) }
+        }
+
         Ext.log({level: 'log'}, 'DEBUG: Constructing LocaleManager');
 
         this.callParent(arguments);

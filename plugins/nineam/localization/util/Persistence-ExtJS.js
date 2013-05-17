@@ -1,4 +1,6 @@
 Ext.define('nineam.localization.util.Persistence-ExtJS', {
+    extend: 'nineam.localization.util.AbstractPersistence',
+
     requires: [
         'Ext.util.Cookies'
     ],
@@ -16,4 +18,4 @@ Ext.define('nineam.localization.util.Persistence-ExtJS', {
         Ext.util.Cookies.set(this.LOCALE_COOKIE_ID,
             value, new Date(new Date().getTime()+(1000*60*60*24*365)));
     }
-})
+});

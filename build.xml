@@ -45,15 +45,9 @@
 		<echo message="Concatenating JavaScript files..." />
 		<concat destfile="build/${filename.debug}" encoding="UTF-8" outputencoding="UTF-8">
 			<header>${copyright.notice}</header>
-			<!--<filterchain>-->
-				<!--<linecontainsregexp negate="true">-->
-					<!--<regexp pattern=""/>-->
-				<!--</linecontainsregexp>-->
-			<!--</filterchain>-->
+
 			<filelist dir="${src.dir}">
 				<!-- NOTE: Order is important - driven by class dependencies. -->
-				<file name="nineam/localization/event/LocaleEvent.js" />
-				<file name="nineam/localization/delegate/LocaleDelegate.js" />
 				<file name="nineam/localization/model/LocaleModel-Touch.js" />
 				<file name="nineam/localization/model/LocaleModel-ExtJS.js" />
 				<file name="nineam/localization/model/LocaleModel.js" />
@@ -62,7 +56,11 @@
 				<file name="nineam/localization/model/ClientModel.js" />
 				<file name="nineam/localization/store/LocalesStore-Touch.js" />
 				<file name="nineam/localization/store/LocalesStore-ExtJS.js" />
-				<file name="nineam/localization/store/LocalesStore.js" />
+                <file name="nineam/localization/util/Persistence-ExtJS.js"/>
+                <file name="nineam/localization/util/Persistence.js"/>
+                <file name="nineam/localization/store/LocalesStore.js" />
+                <file name="nineam/localization/event/LocaleEvent.js" />
+                <file name="nineam/localization/delegate/LocaleDelegate.js" />
 				<file name="nineam/localization/LocaleManager.js" />
 				<file name="nineam/localization/LocalePlugin.js" />
 			</filelist>
@@ -113,10 +111,6 @@
 		<echo message="Creating docs directory..." />
 		<mkdir dir="docs" />
 		<echo message="Created docs directory." />
-
-		<!--<delete includeemptydirs="true" failonerror="false">-->
-		<!--<fileset dir="./docs" />-->
-		<!--</delete>-->
 
 		<!-- For some reason, deleting and re-adding the docs folder often causes a write error. A slight delay usually avoids this. -->
 		<sleep seconds="2"/>
