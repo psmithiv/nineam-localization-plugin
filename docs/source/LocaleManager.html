@@ -15,24 +15,7 @@
   </script>
 </head>
 <body onload="prettyPrint(); highlight();">
-  <pre class="prettyprint lang-js">/*
- Copyright (c) 2013 [ninth avenue media, LLC] (mailto: paul.smith.iv@ninthavenuemedia.com)
-
- nineam-localization-plugin is free software: you can redistribute it and/or modify
- it under the terms of the GNU General Public License as published by
- the Free Software Foundation, either version 3 of the License, or
- (at your option) any later version.
-
- nineam-localization-plugin is distributed in the hope that it will be useful,
- but WITHOUT ANY WARRANTY; without even the implied warranty of
- MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- GNU General Public License for more details.
-
- You should have received a copy of the GNU General Public License
- along with nineam-localization-plugin.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
-*/
-
-<span id='nineam-localization-LocaleManager'>/**
+  <pre class="prettyprint lang-js"><span id='nineam-localization-LocaleManager'>/**
 </span> * Manager class to handle loading of locale properties
  * files/switching locales/updating registered components.
  *
@@ -69,9 +52,9 @@ Ext.define('nineam.localization.LocaleManager', {
     singleton: true,
 
     requires: [
-        //'Ext.util.Cookies',
         'nineam.localization.event.LocaleEvent',
-        'nineam.localization.delegate.LocaleDelegate'
+        'nineam.localization.delegate.LocaleDelegate',
+        'nineam.localization.util.Persistence'
     ],
 
     mixins: {
@@ -153,25 +136,25 @@ Ext.define('nineam.localization.LocaleManager', {
      */
     properties: null,
 
-<span id='nineam-localization-LocaleManager-method-getProperties'>    /**
-</span>     * Get loaded locales object
+<span id='nineam-localization-LocaleManager-method-getProperty'>    /**
+</span>     * Get value from locale file
      *
+     * @param {String}  key - Key to use to look up value in locale file
      * @return {Object}
      */
-    getProperties: function() {
-        return this.properties;
+    getProperty: function(key) {
+        return eval('this.properties.' + key);;
     },
 
 <span id='nineam-localization-LocaleManager-method-getPersistedLocale'>    /**
-</span>     * Get id of last loaded locale
+</span>     * Get id of last loaded locale. If locale is not found in locales, first locale in
+     * locales is returned.
      *
-     * @return {String}
+     * @return {String} - Defaults to first id in locales collection
      */
     getPersistedLocale: function() {
-        //TODO: Fix me
-        //Ext.util.Cookies.get('locale');
-
-        return 'en_us';
+        var locale = nineam.localization.util.Persistence.getLocale();
+        return this.locales.find('id', locale) ? locale : this.locales.getAt(0).get('id');
     },
 
 <span id='nineam-localization-LocaleManager-method-constructor'>    /**
@@ -215,7 +198,7 @@ Ext.define('nineam.localization.LocaleManager', {
         script.innerHTML = result;
         head.appendChild(script);
 
-        //TODO: For some unknown reason,
+        //TODO: Fix Me - It seems that ST2 contains a delay before the onReady method on the locale file is fired.
         var me = this;
         setTimeout(function() {
             //instantiate properties class
@@ -224,7 +207,7 @@ Ext.define('nineam.localization.LocaleManager', {
 
             me.updateClients();
 
-            //Ext.util.Cookies.set('locale', this.locale, new Date(new Date().getTime()+(1000*60*60*24*365)));
+            nineam.localization.util.Persistence.setLocale(me.locale);
 
             me.fireEvent(nineam.localization.event.LocaleEvent.LOCALE_CHANGED, {});
 
@@ -250,7 +233,7 @@ Ext.define('nineam.localization.LocaleManager', {
      * @private
      */
     updateClients: function() {
-        Ext.log({level: 'log'}, 'DEBUG: LocaleManager - Updating Clients')
+        Ext.log({level: 'log'}, 'DEBUG: LocaleManager - Updating Clients');
         var len = this.clients.length-1;
         for(var i=len; i&gt;-1; i--) {
             this.updateClient(this.clients[i]);
@@ -263,25 +246,27 @@ Ext.define('nineam.localization.LocaleManager', {
      * If no key is specified, the entire properties class instance is passed to the methode.
      *
      * @private
-     * @param {nineam.localization.model.ClientModel} clientModel
+     * @param {nineam.localization.model.ClientModel} clientModel - Model object representing the component to be updated
      */
     updateClient: function(clientModel) {
         var client = clientModel.get('client');
         var method = clientModel.get('method');
         var key = clientModel.get('key');
 
-        //call method on comp with value from resource bundle (if key specified)
+        //first look to locale properties for value.
+        //if key does not exist on locale properties for for key on component.
+        //otherwise, pass entire properties object
         try {
             var prop;
             if(key) {
-                var global = eval('this.properties.' + key);
+                var global = this.getProperty(key);
                 prop = global ? global : eval('client.' + key);
             } else {
                 prop = this.properties;
             }
             client[method].call(client, prop);
         } catch(e) {
-            Ext.log({level: 'error'}, 'ERROR: LocaleManager - Error updating client [client: ' + client.getId() + ', method: ' + method + ', key: ' + key + ']');
+            Ext.log({level: 'error'}, 'ERROR: LocaleManager - Error updating client [client: ' + client.getId() + ', method: ' + method + ', key: ' + key + '] - error: ' + e);
         }
     },
 

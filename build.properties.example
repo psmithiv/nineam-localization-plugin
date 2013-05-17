@@ -10,5 +10,5 @@ Copyright (c) 2013 [ninth avenue media, LLC] (mailto: paul.smith.iv@ninthavenuem
 Open source under the [MIT License](http://en.wikipedia.org/wiki/MIT_License).\n\
 */\n\n
 
-yui.dir=/Users/brianmriley/dev/js/libs/yui/builder/componentbuild/lib/yuicompressor/yuicompressor-2.4.2.jar
-jsduck.dir=
+yui.dir=/path/to/yuicompressor
+jsduck.dir=/path/to/jsduck

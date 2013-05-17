@@ -5,87 +5,7 @@ Copyright (c) 2013 [ninth avenue media, LLC] (mailto: paul.smith.iv@ninthavenuem
 Open source under the [MIT License](http://en.wikipedia.org/wiki/MIT_License).
 */
 
- /**
-  * Patch for Ext.picker.Date to allow for updating local at runtime.
-  */
-Ext.define('nineam.localization.controls.Date', {
-    override: 'Ext.picker.Date',
-
-    /*mixin: [
-        'nineam.localization.controls.ILocalization'
-    ],*/
-    renderTpl: [
-        '<div id="{id}-innerEl" role="grid">',
-        '<div role="presentation" class="{baseCls}-header">',
-        '<div class="{baseCls}-prev"><a id="{id}-prevEl" href="#" role="button" title="{prevText}"></a></div>',
-        '<div class="{baseCls}-month" id="{id}-middleBtnEl">{%this.renderMonthBtn(values, out)%}</div>',
-        '<div class="{baseCls}-next"><a id="{id}-nextEl" href="#" role="button" title="{nextText}"></a></div>',
-        '</div>',
-        '<table id="{id}-eventEl" class="{baseCls}-inner" cellspacing="0" role="presentation">',
-        '<thead role="presentation"><tr role="presentation">',
-        '<tpl for="dayNames">',
-        '<th role="columnheader" title="{.}"><span>{.:this.firstInitial}</span></th>',
-        '</tpl>',
-        '</tr></thead>',
-        '<tbody role="presentation"><tr role="presentation">',
-        '<tpl for="days">',
-        '{#:this.isEndOfWeek}',
-        '<td role="gridcell" id="{[Ext.id()]}">',
-        '<a role="presentation" href="#" hidefocus="on" class="{parent.baseCls}-date" tabIndex="1">',
-        '<em role="presentation"><span role="presentation"></span></em>',
-        '</a>',
-        '</td>',
-        '</tpl>',
-        '</tr></tbody>',
-        '</table>',
-        '<tpl if="showToday">',
-        '<div id="{id}-footerEl" role="presentation" class="{baseCls}-footer">{%this.renderTodayBtn(values, out)%}</div>',
-        '</tpl>',
-        '</div>',
-        {
-            firstInitial: function(value) {
-                return Ext.picker.Date.prototype.getDayInitial(value);
-            },
-            isEndOfWeek: function(value) {
-                // convert from 1 based index to 0 based
-                // by decrementing value once.
-                value--;
-                var end = value % 7 === 0 && value !== 0;
-                return end ? '</tr><tr role="row">' : '';
-            },
-            renderTodayBtn: function(values, out) {
-                Ext.DomHelper.generateMarkup(values.$comp.todayBtn.getRenderTree(), out);
-            },
-            renderMonthBtn: function(values, out) {
-                Ext.DomHelper.generateMarkup(values.$comp.monthBtn.getRenderTree(), out);
-            }
-        }
-    ],
-
-    /**
-     * Refresh component now that local has been
-     */
-    refresh: function() {
-        var today = Ext.Date.format(new Date(), this.format);
-
-        if (this.showToday) {
-            this.todayBtn.setText(Ext.String.format(this.todayText, today));
-            this.todayBtn.setTooltip(Ext.String.format(this.todayTip, today));
-        }
-
-        this.monthBtn.setTooltip(this.monthYearText);
-
-        this.update(this.activeDate, true);
-
-        // 'innerEl', 'eventEl', 'prevEl', 'nextEl', 'middleBtnEl', 'footerEl'
-        this.innerEl.dom.title = Ext.String.format(this.ariaTitle, Ext.Date.format(this.activeDate, this.ariaTitleDateFormat));
-        this.prevEl.dom.title = this.prevText;
-        this.nextEl.dom.title = this.nextText;
-
-        this.picker = null;
-        this.hideMonthPicker(true);
-    }
-});/**
+/**
  * Locale event object w/ event names
  */
 Ext.define('nineam.localization.event.LocaleEvent', {
@@ -223,8 +143,7 @@ Ext.define('nineam.localization.model.LocaleModel-ExtJS', {
  * this class instantiates the proper super class.
  */
 Ext.define('nineam.localization.model.LocaleModel', {
-//    extend: Ext.getVersion('extjs') ? 'nineam.localization.model.LocaleModel-ExtJS' : 'nineam.localization.model.LocaleModel-Touch'
-	extend: 'nineam.localization.model.LocaleModel-ExtJS'
+    extend: Ext.getVersion('extjs') ? 'nineam.localization.model.LocaleModel-ExtJS' : 'nineam.localization.model.LocaleModel-Touch'
 });/**
  * Touch version of a model object representing the component/method to call on locale
  * change as well as the key to use to obtain the value to pass to said method.
@@ -349,9 +268,9 @@ Ext.define('nineam.localization.LocaleManager', {
     singleton: true,
 
     requires: [
-        //'Ext.util.Cookies',
         'nineam.localization.event.LocaleEvent',
-        'nineam.localization.delegate.LocaleDelegate'
+        'nineam.localization.delegate.LocaleDelegate',
+        'nineam.localization.util.Persistence'
     ],
 
     mixins: {
@@ -434,24 +353,24 @@ Ext.define('nineam.localization.LocaleManager', {
     properties: null,
 
     /**
-     * Get loaded locales object
+     * Get value from locale file
      *
+     * @param {String}  key - Key to use to look up value in locale file
      * @return {Object}
      */
-    getProperties: function() {
-        return this.properties;
+    getProperty: function(key) {
+        return eval('this.properties.' + key);;
     },
 
     /**
-     * Get id of last loaded locale
+     * Get id of last loaded locale. If locale is not found in locales, first locale in
+     * locales is returned.
      *
-     * @return {String}
+     * @return {String} - Defaults to first id in locales collection
      */
     getPersistedLocale: function() {
-        //TODO: Fix me
-        //Ext.util.Cookies.get('locale');
-
-        return 'en_us';
+        var locale = nineam.localization.util.Persistence.getLocale();
+        return this.locales.find('id', locale) ? locale : this.locales.getAt(0).get('id');
     },
 
     /**
@@ -495,7 +414,7 @@ Ext.define('nineam.localization.LocaleManager', {
         script.innerHTML = result;
         head.appendChild(script);
 
-        //TODO: For some unknown reason,
+        //TODO: Fix Me - It seems that ST2 contains a delay before the onReady method on the locale file is fired.
         var me = this;
         setTimeout(function() {
             //instantiate properties class
@@ -504,7 +423,7 @@ Ext.define('nineam.localization.LocaleManager', {
 
             me.updateClients();
 
-            //Ext.util.Cookies.set('locale', this.locale, new Date(new Date().getTime()+(1000*60*60*24*365)));
+            nineam.localization.util.Persistence.setLocale(me.locale);
 
             me.fireEvent(nineam.localization.event.LocaleEvent.LOCALE_CHANGED, {});
 
@@ -530,7 +449,7 @@ Ext.define('nineam.localization.LocaleManager', {
      * @private
      */
     updateClients: function() {
-        Ext.log({level: 'log'}, 'DEBUG: LocaleManager - Updating Clients')
+        Ext.log({level: 'log'}, 'DEBUG: LocaleManager - Updating Clients');
         var len = this.clients.length-1;
         for(var i=len; i>-1; i--) {
             this.updateClient(this.clients[i]);
@@ -543,18 +462,20 @@ Ext.define('nineam.localization.LocaleManager', {
      * If no key is specified, the entire properties class instance is passed to the methode.
      *
      * @private
-     * @param {nineam.localization.model.ClientModel} clientModel
+     * @param {nineam.localization.model.ClientModel} clientModel - Model object representing the component to be updated
      */
     updateClient: function(clientModel) {
         var client = clientModel.get('client');
         var method = clientModel.get('method');
         var key = clientModel.get('key');
 
-        //call method on comp with value from resource bundle (if key specified)
+        //first look to locale properties for value.
+        //if key does not exist on locale properties for for key on component.
+        //otherwise, pass entire properties object
         try {
             var prop;
             if(key) {
-                var global = eval('this.properties.' + key);
+                var global = this.getProperty(key);
                 prop = global ? global : eval('client.' + key);
             } else {
                 prop = this.properties;

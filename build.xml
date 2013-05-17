@@ -1,4 +1,4 @@
-<project name="LocaleManager" default="buildWithoutDocs">
+<project name="LocaleManager" default="build">
 
 	<property file="build.properties" />
 
@@ -52,7 +52,6 @@
 			<!--</filterchain>-->
 			<filelist dir="${src.dir}">
 				<!-- NOTE: Order is important - driven by class dependencies. -->
-				<file name="nineam/localization/controls/Date.js" />
 				<file name="nineam/localization/event/LocaleEvent.js" />
 				<file name="nineam/localization/delegate/LocaleDelegate.js" />
 				<file name="nineam/localization/model/LocaleModel-Touch.js" />
@@ -124,7 +123,7 @@
 
 		<echo message="Generating API documentation..." />
 		<exec executable="${jsDuckExecutable}" timeout="20000" failonerror="false">
-			<arg line='--warnings=-all --ext-namespaces=Ext --output=docs --ignore-global --title="LocaleManager - API Documentation" src' />
+			<arg line='--warnings=-all --ext-namespaces=Ext --output=docs --ignore-global --title="LocaleManager - API Documentation" plugins' />
 			<arg line='--head-html="&lt;style type=text/css&gt;.class-categories .section .left-column{float:left;width:350px;margin-left:20px} .class-categories .section .middle-column{float:left;width:350px} .class-categories .section .right-column{float:left;width:350px}&lt;/style&gt;"' />
 		</exec>
 
