@@ -91,7 +91,7 @@ Ext.application({
 ```
 
 Finally, we need  to use the LocaleManager as both a plugin to UI components and as a singleton with access to 
-proeprties. Let's start by taking a simple label component and adding the plugin:
+properties. Let's start by taking a simple label component and adding the plugin:
 
 ```js
 {
@@ -105,11 +105,11 @@ proeprties. Let's start by taking a simple label component and adding the plugin
 
 Here we're setting the plugin to the type 'localization' which hooks the UI component to our LocaleManager plugin.
 Here's how it works: when a locale is changed on the LocaleManager at runtime, it updates any UI components using 
-it as a plugin by calling the 'method' property specificed by the plugin and using the value of the 'key' as the
+it as a plugin by calling the 'method' property specified by the plugin and using the value of the 'key' as the
 parameter to that method. In our example, the key 'comp.title' resolves to 'en.comp.title' as defined above in 
 Ext.locales.en.Global.
 
-You can also access proeprties of the LocaleManger via code:
+You can also access properties of the LocaleManger via code:
 
 ```js
 myLabel.setText(nineam.locale.LocaleManager.getProperty("comp.title"));
