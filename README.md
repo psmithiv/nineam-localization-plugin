@@ -5,11 +5,11 @@ A plugin to enable runtime localization in Sencha ExtJS & Sencha Touch applicati
 ## Highlights
 
 * Provides plugin for UI components that enables runtime locale changes.
-* JSDuck documentation.
+* Works with Sencha ExtJS version 4.x and up, Sencha Touch version 2.x+ and up.
 * Build versions for debugging and production.
+* JSDuck documentation.
 * [MIT License](https://github.com/psmithiv/nineam-localization-plugin/blob/master/MIT-LICENSE.txt) compatible with both
 ExtJS and Touch licenses.
-* Works with Sencha ExtJS version 4.x and up, Sencha Touch version 2.x+ and up.
 
 ## Getting Started
 
@@ -27,6 +27,7 @@ Simply add the debug or minified production JS file to your html file:
             <script src="ext/ext-dev.js"></script>
             <script src="bootstrap.js"></script>
         <!-- </x-bootstrap> -->
+        <script src="libs/locale-manager-debug.js"></script>
         <script src="app/app.js"></script>
     <!-- </x-compile> -->
 </head>
@@ -34,7 +35,7 @@ Simply add the debug or minified production JS file to your html file:
 </html>
 ```
 
-Create some localization proeprties by locating the default ExtJS or Touch locale file for English: ext-lang-en.js. 
+Create some localization properties by locating the default ExtJS or Touch locale file for English: ext-lang-en.js. 
 Add some properties to it at the bottom of the file by creating a new properties class:
 
 ```js
