@@ -2,28 +2,34 @@
  * ExtJS/Touch plugin used to register component with LocaleManager.
  */
 Ext.define('nineam.localization.LocalePlugin', {
-    extend: Ext.getVersion('extjs') ? 'Ext.AbstractPlugin' : 'Ext.Component',
-    alias: 'plugin.localization',
+    /**
+     * Extend configuration object for managing differences between ExtJS and ST2.
+     *
+     * This object is handled by the extendConfig preprocessor.
+     *
+     * @private
+     */
+    extendConfig: {
+        extjs: 'Ext.AbstractPlugin',
+        st: 'Ext.Component'
+    },
 
-    requires: [
-        'nineam.localization.LocaleManager',
-        'nineam.localization.model.ClientModel'
-    ],
+    alias: 'plugin.localization',
 
     config: {
         /**
-         * Method to call on component when locale chagnes.
+         * Method to call on component when locale changes.
          *
          * @cfg {String} method
          */
-        method: "",
+        method: '',
 
         /**
          * Key to use to lookup value on locale properties class.
          *
          * @cfg {String} key
          */
-        key: ""
+        key: ''
     },
 
     /**

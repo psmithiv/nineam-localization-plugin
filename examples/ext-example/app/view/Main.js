@@ -6,8 +6,7 @@ Ext.define("nineam-localization-plugin-ext.view.Main", {
     requires: [
         'Ext.form.Label',
         'Ext.form.field.ComboBox',
-        'Ext.picker.Date',
-        'nineam.localization.LocaleManager'
+        'Ext.picker.Date'
     ],
 
     padding: '10px 10px 10px 10px',

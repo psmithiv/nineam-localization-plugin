@@ -5,5 +5,24 @@
  * this class instantiates the proper super class.
  */
 Ext.define('nineam.localization.store.LocalesStore', {
-    extend: Ext.getVersion('extjs') ? 'nineam.localization.store.LocalesStore-ExtJS' : 'nineam.localization.store.LocalesStore-Touch'
+    extend: 'Ext.data.Store',
+
+    requires: [
+        'Ext.data.reader.Json'
+    ],
+
+    //handled by storeConfig preprocessor
+    storeConfig: {
+        storeId: 'localesStore',
+
+        model: 'nineam.localization.model.LocaleModel',
+
+        proxy: {
+            type: 'memory',
+            reader: {
+                type: 'json',
+                root: ''
+            }
+        }
+    }
 });

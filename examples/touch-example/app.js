@@ -1,9 +1,3 @@
-Ext.Loader.setPath({
-    'Ext': 'touch/src',
-    'nineam-localization-plugin-touch': 'app',
-    'nineam': '/plugins/nineam'
-});
-
 Ext.application({
     name: 'nineam-localization-plugin-touch',
 
@@ -15,10 +9,6 @@ Ext.application({
     ],
 
     views: ['Main'],
-
-    stores: [
-        'nineam.localization.store.LocalesStore'
-    ],
 
     icon: {
         '57': 'resources/icons/Icon.png',

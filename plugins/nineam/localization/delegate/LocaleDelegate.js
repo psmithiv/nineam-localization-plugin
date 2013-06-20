@@ -7,20 +7,21 @@ Ext.define('nineam.localization.delegate.LocaleDelegate', {
     ],
 
     /**
-     * Success method to call when loading locale file
+     * Success method to call when loading locale file.
      *
      * @private
      */
-    success: {},
+    success: function() {},
 
     /**
-     * Fault method to call when loading locale file
+     * Fault method to call when loading locale file.
+     *
      * @private
      */
-    failure: {},
+    failure: function() {},
 
     /**
-     * Scope to execute success/failure method within
+     * Scope to execute success/failure method within.
      *
      * @private
      */

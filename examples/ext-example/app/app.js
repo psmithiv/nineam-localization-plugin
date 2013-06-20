@@ -1,24 +1,5 @@
-Ext.Loader.setConfig({
-	'nineam-localization-plugin-ext':     'app',
-
-	// NOTE: if using ext-dev.js the path to plugin source must be uncommented.
-	// NOTE: if using ext-all.js then comment this out.
-	paths: {
-		nineam: '../../plugins/nineam'
-	},
-
-	enabled:            true,
-	disableCaching:     true
-});
-
 Ext.application({
     requires: [
-	    'nineam.localization.model.LocaleModel-ExtJS',
-	    'nineam.localization.model.ClientModel-ExtJS',
-        'nineam.localization.LocaleManager',
-        'nineam.localization.LocalePlugin',
-        'nineam.localization.model.ClientModel',
-        'nineam.localization.store.LocalesStore',
         'nineam-localization-plugin-ext.controls.Date',
         'Ext.form.Label'
     ],

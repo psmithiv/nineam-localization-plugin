@@ -34,39 +34,31 @@
 Ext.define('nineam.localization.LocaleManager', {
     singleton: true,
 
-    requires: [
-        'nineam.localization.event.LocaleEvent',
-        'nineam.localization.delegate.LocaleDelegate',
-        'nineam.localization.util.Persistence'
-    ],
-
     mixins: {
         observable: 'Ext.util.Observable'
     },
 
     /**
-     * {Boolean} initialized - Has the LocaleManager has it's available locales set and loaded the initial locale file
-     *
-     * @private
+     * Has the LocaleManager had it's available locales set and loaded the initial locale file.
      */
     initialized: false,
 
     /**
-     * {Array} clients - Array of components to be localized
+     * Array of {nineam.localization.model.ClientModel}'s to use for localization.
      *
      * @private
      */
     clients: [],
 
     /**
-     * {nineam.localization.store.LocalesStore} locales - Store of available LocaleModels
+     * {nineam.localization.store.LocalesStore} of available LocaleModels.
      *
      * @private
      */
     locales: null,
 
     /**
-     * Get store of available LocaleModel's
+     * Get store of available LocaleModel's.
      *
      * @return {nineam.localization.store.LocalesStore}
      */
@@ -75,7 +67,7 @@ Ext.define('nineam.localization.LocaleManager', {
     },
 
     /**
-     * Set store of available LocaleModel's
+     * Set store of available LocaleModel's.
      *
      * @param {nineam.localization.store.LocalesStore} value - LocalesStore used by LocaleManager
      */
@@ -86,25 +78,25 @@ Ext.define('nineam.localization.LocaleManager', {
     },
 
     /**
-     * {String} locale - Id of currently selected locale
+     * Id of currently selected locale.
      *
      * @private
      */
-    locale: null,
+    locale: '',
 
     /**
-     * Get the id of the currently selected locale
+     * Get the id of the currently selected locale.
      *
-     * @return {string} - Id of currently selected locale
+     * @return {String} - Id of currently selected locale
      */
     getLocale: function() {
         return this.locale;
     },
 
     /**
-     * Set the id of the currently locale
+     * Set the id of the current locale and load properties file.
      *
-     * @param {String} value - Id of locale  to load
+     * @param {String} value - Id of locale to load
      */
     setLocale: function(value) {
         this.locale = value;
@@ -113,14 +105,14 @@ Ext.define('nineam.localization.LocaleManager', {
     },
 
     /**
-     * {Object} properties - Instance of loaded locale properties class
+     * Instance of loaded locale properties class.
      *
      * @private
      */
     properties: null,
 
     /**
-     * Get value from locale file
+     * Get value from locale file.
      *
      * @param {String}  key - Key to use to look up value in locale file
      * @return {Object}
@@ -133,11 +125,11 @@ Ext.define('nineam.localization.LocaleManager', {
      * Get id of last loaded locale. If locale is not found in locales, first locale in
      * locales is returned.
      *
-     * @return {String} - Defaults to first id in locales collection
+     * @return {String} - Defaults to first id in locales store
      */
     getPersistedLocale: function() {
         var locale = nineam.localization.util.Persistence.getLocale();
-        return this.locales.find('id', locale) ? locale : this.locales.getAt(0).get('id');
+        return this.locales.find('id', locale) != -1 ? locale : this.locales.getAt(0).get('id');
     },
 
     /**
@@ -158,14 +150,15 @@ Ext.define('nineam.localization.LocaleManager', {
     },
 
     /**
-     * Load properties file for localizing components
+     * Load properties file for localizing components.
      *
      * @private
      */
     loadPropertiesFile: function() {
         //first load resource bundle
         var rec = this.locales.findRecord('id', this.locale);
-        var fd = new nineam.localization.delegate.LocaleDelegate(this.loadPropertiesFileResultHandler, this.loadPropertiesFileFaultHandler, this);
+
+        var fd = Ext.create('nineam.localization.delegate.LocaleDelegate', this.loadPropertiesFileResultHandler, this.loadPropertiesFileFaultHandler, this);
         var url = rec.get('url');
 
         Ext.log({level: 'log'}, 'DEBUG: LocaleManager - Loading properties file: ' + url);
@@ -174,6 +167,8 @@ Ext.define('nineam.localization.LocaleManager', {
     },
 
     /**
+     * Result handler for call to load locale properties file.
+     *
      * @private
      * @param {String} result
      */
@@ -210,6 +205,8 @@ Ext.define('nineam.localization.LocaleManager', {
     },
 
     /**
+     * Fault handler for call to load locale properties file.
+     *
      * @private
      */
     loadPropertiesFileFaultHandler: function() {
@@ -217,7 +214,7 @@ Ext.define('nineam.localization.LocaleManager', {
     },
 
     /**
-     * Go over and update all localized components in the application
+     * Go over and update all localized components in the application.
      *
      * @private
      */
@@ -232,7 +229,7 @@ Ext.define('nineam.localization.LocaleManager', {
     /**
      * Call specified method on client passing the retrieved value based on the specified key. If a
      * value can not be found on the properties class, this method will next look to the components instance.
-     * If no key is specified, the entire properties class instance is passed to the methode.
+     * If no key is specified, the entire properties class instance is passed to the method.
      *
      * @private
      * @param {nineam.localization.model.ClientModel} clientModel - Model object representing the component to be updated
@@ -260,7 +257,7 @@ Ext.define('nineam.localization.LocaleManager', {
     },
 
     /**
-     * Register a client component for localization
+     * Register a client component for localization.
      *
      * @param {nineam.localization.model.ClientModel} clientModel - Model object representing component to localize
      */
