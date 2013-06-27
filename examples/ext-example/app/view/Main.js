@@ -6,14 +6,16 @@ Ext.define("nineam-localization-plugin-ext.view.Main", {
     requires: [
         'Ext.form.Label',
         'Ext.form.field.ComboBox',
-        'Ext.picker.Date'
+        'Ext.picker.Date',
+        'nineam-localization-plugin-ext.controls.LocalesComboBox'
     ],
 
     padding: '10px 10px 10px 10px',
 
     items: [{
-        xtype: 'combobox',
+        xtype: 'localesCombobox',
         fieldLabel: 'Locale',
+        labelWidth: 155,
         store: 'localesStore',
         displayField: 'label',
         editable: false,
@@ -26,10 +28,17 @@ Ext.define("nineam-localization-plugin-ext.view.Main", {
             render: function(scope) {
                 scope.setValue(nineam.localization.LocaleManager.getLocale());
             }
-        }
+        },
+
+        plugins: [
+            { ptype: 'localization', method: 'refresh', key: 'localeLabels' }
+        ]
     },{
         xtype: 'container',
-        height: 10
+        width: '100%',
+        height: 1,
+        margin: '10px 0px 10px 0px',
+        style: 'border-style: solid none none none; border-color: #000000; border-width: 1px;'
     },{
         xtype: 'container',
         width: '100%',
@@ -44,7 +53,7 @@ Ext.define("nineam-localization-plugin-ext.view.Main", {
         },{
             xtype: 'label',
             plugins: [
-                { ptype: 'localization', method: 'setText', key: 'comp.title' }
+                { ptype: 'localization', method: 'setText', key: 'label' }
             ]
         }]
     },{
@@ -60,32 +69,13 @@ Ext.define("nineam-localization-plugin-ext.view.Main", {
         items: [{
             xtype: 'label',
             width: 160,
-            text: 'Calender (Custom Method):'
-        },{
-            xtype: 'datepicker',
-            plugins: [
-                { ptype: 'localization', method: 'refresh' }
-            ]
-        }]
-    },{
-        xtype: 'container',
-        height: 10
-    },{
-        xtype: 'container',
-        width: '100%',
-        layout: {
-            type: 'hbox'
-        },
-
-        items: [{
-            xtype: 'label',
-            width: 160,
+            padding: '3px 0px 0px 0px',
             text: 'Button Text/Width:'
         },{
             xtype: 'button',
             plugins: [
-                { ptype: 'localization', method: 'setWidth', key: 'btnWidth' },
-                { ptype: 'localization', method: 'setText', key: 'title' }
+                { ptype: 'localization', method: 'setWidth', key: 'button.width' },
+                { ptype: 'localization', method: 'setText', key: 'button.label' }
             ]
         }]
     },{
@@ -101,13 +91,35 @@ Ext.define("nineam-localization-plugin-ext.view.Main", {
         items: [{
             xtype: 'label',
             width: 160,
+            padding: '5px 0px 0px 0px',
             text: 'Panel Title:'
         },{
             xtype: 'panel',
             width: 300,
             height: 60,
             plugins: [
-                { ptype: 'localization', method: 'setTitle', key: 'comp.title' }
+                { ptype: 'localization', method: 'setTitle', key: 'panel.title' }
+            ]
+        }]
+    },{
+        xtype: 'container',
+        height: 10
+    },{
+        xtype: 'container',
+        width: '100%',
+        layout: {
+            type: 'hbox'
+        },
+
+        items: [{
+            xtype: 'label',
+            width: 160,
+            padding: '6px 0px 0px 0px',
+            text: 'Calender (Custom Method):'
+        },{
+            xtype: 'datepicker',
+            plugins: [
+                { ptype: 'localization', method: 'refresh' }
             ]
         }]
     }]

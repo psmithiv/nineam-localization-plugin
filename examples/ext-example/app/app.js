@@ -14,6 +14,7 @@ Ext.application({
         //Configure localization manager
         var lm = nineam.localization.LocaleManager;
         lm.addListener(nineam.localization.event.LocaleEvent.LOCALES_CHANGED, this.localesChangedEventHandler, this);
+        lm.addListener(nineam.localization.event.LocaleEvent.LOCALE_LOADING, this.localeLoadingEventHandler, this);
         lm.addListener(nineam.localization.event.LocaleEvent.LOCALE_CHANGED, this.localeChangedEventHandler, this);
         lm.addListener(nineam.localization.event.LocaleEvent.INITIALIZED, this.localeManagerInitializedEventHandler, this);
 
@@ -31,15 +32,19 @@ Ext.application({
     },
 
     localesChangedEventHandler: function(event) {
-        //console.log('STATUS: LocaleManager - LOCALES_CHANGED');
+        console.log('STATUS EVENT: LocaleManager - LOCALES_CHANGED');
+    },
+
+    localeLoadingEventHandler: function(event) {
+        console.log('STATUS EVENT: LocaleManager - LOCALE_LOADING');
     },
 
     localeChangedEventHandler: function(event) {
-        //console.log('STATUS: LocaleManager - LOCALE_CHANGED');
+        console.log('STATUS EVENT: LocaleManager - LOCALE_CHANGED');
     },
 
     localeManagerInitializedEventHandler: function(event) {
-        //console.log('STATUS: LocaleManager - INITIALIZED')
+        console.log('STATUS EVENT: LocaleManager - INITIALIZED')
     }
 });
 

@@ -99,6 +99,8 @@ Ext.define('nineam.localization.LocaleManager', {
      * @param {String} value - Id of locale to load
      */
     setLocale: function(value) {
+        this.fireEvent(nineam.localization.event.LocaleEvent.LOCALE_LOADING, {});
+
         this.locale = value;
 
         this.loadPropertiesFile();

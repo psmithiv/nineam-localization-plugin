@@ -5,7 +5,7 @@ Ext.define('nineam-localization-plugin-ext.controls.Date', {
     override: 'Ext.picker.Date',
 
     /**
-     * Refresh component now that local has changed
+     * Refresh component using Sencha properties now that local has changed
      */
     refresh: function() {
         var today = Ext.Date.format(new Date(), this.format);
