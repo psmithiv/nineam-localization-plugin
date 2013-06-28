@@ -229,9 +229,9 @@ Ext.define('nineam.localization.LocaleManager', {
     },
 
     /**
-     * Call specified method on client passing the retrieved value based on the specified key. If a
-     * value can not be found on the properties class, this method will next look to the components instance.
-     * If no key is specified, the entire properties class instance is passed to the method.
+     * Call specified method on client passing the retrieved value based on the specified key.
+     * If a value can not be found on the properties class or no key is specified,
+     * the entire properties class instance is passed to the method.
      *
      * @private
      * @param {nineam.localization.model.ClientModel} clientModel - Model object representing the component to be updated
@@ -241,18 +241,23 @@ Ext.define('nineam.localization.LocaleManager', {
         var method = clientModel.get('method');
         var key = clientModel.get('key');
 
-        //first look to locale properties for value.
-        //if key does not exist on locale properties for for key on component.
-        //otherwise, pass entire properties object
+        //First look to locale properties for value.
+        //If key does not exist on locale properties or is not specified,
+        //pass entire properties object.
         try {
             var prop;
             if(key) {
                 var global = this.getProperty(key);
-                prop = global ? global : eval('client.' + key);
+                prop = global ? global : this.properties;
             } else {
                 prop = this.properties;
             }
-            client[method].call(client, prop);
+
+            if(typeof(method) === 'string') {
+                client[method].call(client, prop);
+            } else if(typeof(method) === 'function') {
+                method.call(client, prop);
+            }
         } catch(e) {
             Ext.log({level: 'error'}, 'ERROR: LocaleManager - Error updating client [client: ' + client.getId() + ', method: ' + method + ', key: ' + key + '] - error: ' + e);
         }

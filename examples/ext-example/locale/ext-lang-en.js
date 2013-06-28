@@ -12,6 +12,8 @@ Ext.onReady(function() {
             title: 'Panel Title -English'
         },
 
+        cssCls: 'styleEN',
+
         //Advanced example showing localization using custom refresh method
         localeLabels: [
             {id: 'en_us', label: 'English'},

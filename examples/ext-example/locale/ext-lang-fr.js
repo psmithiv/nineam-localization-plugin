@@ -12,6 +12,8 @@
             title: 'Panneau titre -Français'
         },
 
+        cssCls: 'styleFR',
+
         //Advanced example showing localization using custom refresh method
         localeLabels: [
             {id: 'en_us', label: 'English (Anglais)'},

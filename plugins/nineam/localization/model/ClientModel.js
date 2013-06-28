@@ -14,7 +14,7 @@ Ext.define('nineam.localization.model.ClientModel', {
      */
     modelConfig: [
         {name: 'client', type: 'object'},
-        {name: 'method', type: 'string'},
+        {name: 'method', type: 'object'},
         {name: 'key', type: 'string'}
     ]
 });

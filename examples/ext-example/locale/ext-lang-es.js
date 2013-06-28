@@ -12,6 +12,8 @@ Ext.onReady(function() {
             title: 'Texto de la etiqueta -Español'
         },
 
+        cssCls: 'styleES',
+
         //Advanced example showing localization using custom refresh method
         localeLabels: [
             {id: 'en_us', label: 'English (Inglés)'},

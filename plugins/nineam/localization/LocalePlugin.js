@@ -22,7 +22,7 @@ Ext.define('nineam.localization.LocalePlugin', {
          *
          * @cfg {String} method
          */
-        method: '',
+        method: {},
 
         /**
          * Key to use to lookup value on locale properties class.
