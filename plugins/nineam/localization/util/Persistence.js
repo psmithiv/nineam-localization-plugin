@@ -19,7 +19,7 @@ Ext.define('nineam.localization.util.Persistence', {
     getLocale: function() {
         var regex = new RegExp('(?:^|;)\\s?' + this.LOCALE_COOKIE_ID + '=(.*?)(?:;|$)','i');
         var match = document.cookie.match(regex);
-        var value = match ? unescape(match[1]) : null;;
+        var value = match ? unescape(match[1]) : null;
 
         Ext.log({level: 'log'}, 'DEBUG: LocaleManager - Getting persisted locale id: ' + value);
 
