@@ -14,8 +14,8 @@
 
         //Advanced example showing localization using custom refresh method
         localeLabels: [
-            {id: 'en_us', label: 'Anglais'},
-            {id: 'es_us', label: 'Espagnol'},
+            {id: 'en_us', label: 'English (Anglais)'},
+            {id: 'es_us', label: 'Español (Espagnol)'},
             {id: 'fr_fr', label: 'Français'}
         ]
     });

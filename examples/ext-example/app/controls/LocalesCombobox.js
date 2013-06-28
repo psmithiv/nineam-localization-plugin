@@ -10,17 +10,24 @@ Ext.define('nineam-localization-plugin-ext.controls.LocalesComboBox', {
         //get the index of the currently selected model
         var selectionIndex = this.store.find('label', this.getRawValue());
 
-        //create new store from old store and update with new label values
+        //copy model objects from the stores mixedCollection into an array to be used when creating a new store
+        var data = [];
+        var storeLen = this.store.getCount();
+        for(var i=0; i<storeLen; i++) {
+            data.push(this.store.getAt(i));
+        }
+
+        //create new store from old store's data
         var store = Ext.create('nineam.localization.store.LocalesStore', {
-            data: [
-                this.store.getAt(0),
-                this.store.getAt(1)
-            ]
+            data: data
         })
 
-        for(var i in labels) {
-            var itemIndex = store.find('id', i);
-            store.getAt(itemIndex).set('label', labels[i]);
+        //update new store with new label values
+        var labelsLen = labels.length;
+        for(var i=0; i<labelsLen; i++) {
+            var label = labels[i];
+            var itemIndex = store.find('id', label.id);
+            store.getAt(itemIndex).set('label', label.label);
         }
 
         //bind ComboBox to new store

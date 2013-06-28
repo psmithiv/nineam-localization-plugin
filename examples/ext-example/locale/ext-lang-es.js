@@ -14,9 +14,9 @@ Ext.onReady(function() {
 
         //Advanced example showing localization using custom refresh method
         localeLabels: [
-            {id: 'en_us', label: 'Inglés'},
+            {id: 'en_us', label: 'English (Inglés)'},
             {id: 'es_us', label: 'Español'},
-            {id: 'fr_fr', label: 'Francés'}
+            {id: 'fr_fr', label: 'Français (Francés)'}
         ]
     });
 
