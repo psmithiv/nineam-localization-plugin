@@ -1,8 +1,13 @@
+/**
+ * Util class for persisting/retrieving the last loaded locale id from a cookie
+ */
 Ext.define('nineam.localization.util.Persistence', {
     singleton: true,
 
     /**
      * Name to use for persisting locale id to cookie
+     *
+     * @private
      */
     LOCALE_COOKIE_ID: 'nineam.localization.util.Persistence-ExtJS.LOCALE_COOKIE_ID_1',
 

@@ -4,7 +4,7 @@
 Ext.define('nineam.localization.event.LocaleEvent', {
     statics: {
         /**
-         * The LocaleManager has loaded it's first locale file and is now initialized.
+         * The LocaleManager has loaded it's first locale file, updated all components, and is now initialized.
          *
          * @event
          */
@@ -19,6 +19,8 @@ Ext.define('nineam.localization.event.LocaleEvent', {
 
         /**
          * Loading the locale file for the currently selected locale
+         *
+         * @event
          */
         LOCALE_LOADING: 'nineam.localization.event.LocaleEvent.LOCALE_LOADING',
 

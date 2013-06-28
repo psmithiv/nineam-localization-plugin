@@ -94,7 +94,7 @@ Ext.define('nineam.localization.LocaleManager', {
     },
 
     /**
-     * Set the id of the current locale and load properties file.
+     * Set the id of the current locale, load properties file, and update components.
      *
      * @param {String} value - Id of locale to load
      */
@@ -245,16 +245,13 @@ Ext.define('nineam.localization.LocaleManager', {
         //If key does not exist on locale properties or is not specified,
         //pass entire properties object.
         try {
-            /*var prop;
+            var prop;
             if(key) {
                 var global = this.getProperty(key);
                 prop = global ? global : this.properties;
             } else {
                 prop = this.properties;
-            }*/
-
-            var global = this.getProperty(key);
-            var prop = global ? global : this.properties;
+            }
 
             if(typeof(method) === 'string') {
                 client[method].call(client, prop);

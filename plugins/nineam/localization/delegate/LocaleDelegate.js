@@ -11,14 +11,14 @@ Ext.define('nineam.localization.delegate.LocaleDelegate', {
      *
      * @private
      */
-    success: function() {},
+    success: {},
 
     /**
      * Fault method to call when loading locale file.
      *
      * @private
      */
-    failure: function() {},
+    failure: {},
 
     /**
      * Scope to execute success/failure method within.

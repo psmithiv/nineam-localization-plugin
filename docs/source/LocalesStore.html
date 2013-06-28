@@ -17,9 +17,6 @@
 <body onload="prettyPrint(); highlight();">
   <pre class="prettyprint lang-js"><span id='nineam-localization-store-LocalesStore'>/**
 </span> * Store containing a list of LocaleModel objects.
- *
- * Note: Based on the current framework version (ext vs. touch)
- * this class instantiates the proper super class.
  */
 Ext.define('nineam.localization.store.LocalesStore', {
     extend: 'Ext.data.Store',
@@ -28,8 +25,14 @@ Ext.define('nineam.localization.store.LocalesStore', {
         'Ext.data.reader.Json'
     ],
 
-<span id='nineam-localization-store-LocalesStore-property-storeConfig'>    //handled by storeConfig preprocessor
-</span>    storeConfig: {
+<span id='nineam-localization-store-LocalesStore-property-storeConfig'>    /**
+</span>     * Store configuration object for managing differences between ExtJS and ST2.
+     *
+     * This object is handled by the storeConfig preprocessor.
+     *
+     * @private
+     */
+    storeConfig: {
         storeId: 'localesStore',
 
         model: 'nineam.localization.model.LocaleModel',

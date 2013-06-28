@@ -82,9 +82,6 @@ Ext.define('nineam.localization.model.LocaleModel', {
     ]
 });/**
  * Store containing a list of LocaleModel objects.
- *
- * Note: Based on the current framework version (ext vs. touch)
- * this class instantiates the proper super class.
  */
 Ext.define('nineam.localization.store.LocalesStore', {
     extend: 'Ext.data.Store',
@@ -93,7 +90,13 @@ Ext.define('nineam.localization.store.LocalesStore', {
         'Ext.data.reader.Json'
     ],
 
-    //handled by storeConfig preprocessor
+    /**
+     * Store configuration object for managing differences between ExtJS and ST2.
+     *
+     * This object is handled by the storeConfig preprocessor.
+     *
+     * @private
+     */
     storeConfig: {
         storeId: 'localesStore',
 
@@ -107,11 +110,16 @@ Ext.define('nineam.localization.store.LocalesStore', {
             }
         }
     }
-});Ext.define('nineam.localization.util.Persistence', {
+});/**
+ * Util class for persisting/retrieving the last loaded locale id from a cookie
+ */
+Ext.define('nineam.localization.util.Persistence', {
     singleton: true,
 
     /**
      * Name to use for persisting locale id to cookie
+     *
+     * @private
      */
     LOCALE_COOKIE_ID: 'nineam.localization.util.Persistence-ExtJS.LOCALE_COOKIE_ID_1',
 
@@ -183,7 +191,7 @@ Ext.define('nineam.localization.model.ClientModel', {
 Ext.define('nineam.localization.event.LocaleEvent', {
     statics: {
         /**
-         * The LocaleManager has loaded it's first locale file and is now initialized.
+         * The LocaleManager has loaded it's first locale file, updated all components, and is now initialized.
          *
          * @event
          */
@@ -198,6 +206,8 @@ Ext.define('nineam.localization.event.LocaleEvent', {
 
         /**
          * Loading the locale file for the currently selected locale
+         *
+         * @event
          */
         LOCALE_LOADING: 'nineam.localization.event.LocaleEvent.LOCALE_LOADING',
 
@@ -221,14 +231,14 @@ Ext.define('nineam.localization.delegate.LocaleDelegate', {
      *
      * @private
      */
-    success: function() {},
+    success: {},
 
     /**
      * Fault method to call when loading locale file.
      *
      * @private
      */
-    failure: function() {},
+    failure: {},
 
     /**
      * Scope to execute success/failure method within.
@@ -383,7 +393,7 @@ Ext.define('nineam.localization.LocaleManager', {
     },
 
     /**
-     * Set the id of the current locale and load properties file.
+     * Set the id of the current locale, load properties file, and update components.
      *
      * @param {String} value - Id of locale to load
      */

@@ -1,8 +1,5 @@
 /**
  * Store containing a list of LocaleModel objects.
- *
- * Note: Based on the current framework version (ext vs. touch)
- * this class instantiates the proper super class.
  */
 Ext.define('nineam.localization.store.LocalesStore', {
     extend: 'Ext.data.Store',
@@ -11,7 +8,13 @@ Ext.define('nineam.localization.store.LocalesStore', {
         'Ext.data.reader.Json'
     ],
 
-    //handled by storeConfig preprocessor
+    /**
+     * Store configuration object for managing differences between ExtJS and ST2.
+     *
+     * This object is handled by the storeConfig preprocessor.
+     *
+     * @private
+     */
     storeConfig: {
         storeId: 'localesStore',
 
