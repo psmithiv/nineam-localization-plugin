@@ -36,6 +36,12 @@ Ext.define("nineam-localization-plugin-ext.view.Main", {
         ]
     },{
         xtype: 'container',
+        width: '100%',
+        height: 1,
+        margin: '5px 0px 0px 0px',
+        style: 'border-style: solid none none none; border-color: #000000; border-width: 1px;'
+    },{
+        xtype: 'container',
         height: 30
     },{
         xtype: 'label',

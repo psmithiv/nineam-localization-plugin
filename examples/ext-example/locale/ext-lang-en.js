@@ -5,7 +5,7 @@ Ext.onReady(function() {
 
         button: {
             label: 'Button Text -English',
-            width: 300
+            width: 150
         },
 
         panel: {
