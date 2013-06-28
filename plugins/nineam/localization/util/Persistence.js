@@ -9,7 +9,7 @@ Ext.define('nineam.localization.util.Persistence', {
      *
      * @private
      */
-    LOCALE_COOKIE_ID: 'nineam.localization.util.Persistence-ExtJS.LOCALE_COOKIE_ID_1',
+    LOCALE_COOKIE_ID: 'nineam.localization.util.Persistence-ExtJS.LOCALE_COOKIE_ID_2',
 
     /**
      * Retrieve locale Id from cookie
@@ -17,30 +17,13 @@ Ext.define('nineam.localization.util.Persistence', {
      * @return {String} - The persisted locale Id
      */
     getLocale: function() {
-        var c_value = document.cookie;
-        var c_start = c_value.indexOf(" " + this.LOCALE_COOKIE_ID + "=");
-        if (c_start == -1)
-        {
-            c_start = c_value.indexOf(this.LOCALE_COOKIE_ID + "=");
-        }
-        if (c_start == -1)
-        {
-            c_value = null;
-        }
-        else
-        {
-            c_start = c_value.indexOf("=", c_start) + 1;
-            var c_end = c_value.indexOf(";", c_start);
-            if (c_end == -1)
-            {
-                c_end = c_value.length;
-            }
-            c_value = unescape(c_value.substring(c_start,c_end));
-        }
+        var regex = new RegExp('(?:^|;)\\s?' + this.LOCALE_COOKIE_ID + '=(.*?)(?:;|$)','i');
+        var match = document.cookie.match(regex);
+        var value = match ? unescape(match[1]) : null;;
 
-        Ext.log({level: 'log'}, 'DEBUG: LocaleManager - Getting persisted locale id: ' + c_value);
+        Ext.log({level: 'log'}, 'DEBUG: LocaleManager - Getting persisted locale id: ' + value);
 
-        return c_value;
+        return value;
     },
 
     /**
@@ -51,7 +34,6 @@ Ext.define('nineam.localization.util.Persistence', {
     setLocale: function(value) {
         Ext.log({level: 'log'}, 'DEBUG: LocaleManager - Persisting locale id: ' + value);
 
-        var c_value = escape(value) + "; expires="+new Date(new Date().getTime()+(1000*60*60*24*365)).toUTCString();
-        document.cookie = this.LOCALE_COOKIE_ID + "=" + c_value;
+        document.cookie = this.LOCALE_COOKIE_ID + "=" + escape(value) + "; expires="+new Date(new Date().getTime()+(1000*60*60*24*365)).toUTCString();
     }
 });

@@ -61,7 +61,8 @@ Ext.Class.registerPreprocessor('storeConfig', function(cls, data, hooks, fn) {
     // know for sure that it exists. (removes 404 warning at startup)
     if(Ext.getVersion('extjs'))
         Ext.exclude(data.model).require('*');
-}, false, 'before', 'extend');/**
+}, false, 'before', 'extend');
+/**
  * Model object representing a loadable locale.
  */
 Ext.define('nineam.localization.model.LocaleModel', {
@@ -80,7 +81,8 @@ Ext.define('nineam.localization.model.LocaleModel', {
         {name: 'url', type: 'string'},
         {name: 'propertiesClass', type: 'string'}
     ]
-});/**
+});
+/**
  * Store containing a list of LocaleModel objects.
  */
 Ext.define('nineam.localization.store.LocalesStore', {
@@ -110,7 +112,8 @@ Ext.define('nineam.localization.store.LocalesStore', {
             }
         }
     }
-});/**
+});
+/**
  * Util class for persisting/retrieving the last loaded locale id from a cookie
  */
 Ext.define('nineam.localization.util.Persistence', {
@@ -121,7 +124,7 @@ Ext.define('nineam.localization.util.Persistence', {
      *
      * @private
      */
-    LOCALE_COOKIE_ID: 'nineam.localization.util.Persistence-ExtJS.LOCALE_COOKIE_ID_1',
+    LOCALE_COOKIE_ID: 'nineam.localization.util.Persistence-ExtJS.LOCALE_COOKIE_ID_2',
 
     /**
      * Retrieve locale Id from cookie
@@ -129,30 +132,13 @@ Ext.define('nineam.localization.util.Persistence', {
      * @return {String} - The persisted locale Id
      */
     getLocale: function() {
-        var c_value = document.cookie;
-        var c_start = c_value.indexOf(" " + this.LOCALE_COOKIE_ID + "=");
-        if (c_start == -1)
-        {
-            c_start = c_value.indexOf(this.LOCALE_COOKIE_ID + "=");
-        }
-        if (c_start == -1)
-        {
-            c_value = null;
-        }
-        else
-        {
-            c_start = c_value.indexOf("=", c_start) + 1;
-            var c_end = c_value.indexOf(";", c_start);
-            if (c_end == -1)
-            {
-                c_end = c_value.length;
-            }
-            c_value = unescape(c_value.substring(c_start,c_end));
-        }
+        var regex = new RegExp('(?:^|;)\\s?' + this.LOCALE_COOKIE_ID + '=(.*?)(?:;|$)','i');
+        var match = document.cookie.match(regex);
+        var value = match ? unescape(match[1]) : null;;
 
-        Ext.log({level: 'log'}, 'DEBUG: LocaleManager - Getting persisted locale id: ' + c_value);
+        Ext.log({level: 'log'}, 'DEBUG: LocaleManager - Getting persisted locale id: ' + value);
 
-        return c_value;
+        return value;
     },
 
     /**
@@ -163,10 +149,10 @@ Ext.define('nineam.localization.util.Persistence', {
     setLocale: function(value) {
         Ext.log({level: 'log'}, 'DEBUG: LocaleManager - Persisting locale id: ' + value);
 
-        var c_value = escape(value) + "; expires="+new Date(new Date().getTime()+(1000*60*60*24*365)).toUTCString();
-        document.cookie = this.LOCALE_COOKIE_ID + "=" + c_value;
+        document.cookie = this.LOCALE_COOKIE_ID + "=" + escape(value) + "; expires="+new Date(new Date().getTime()+(1000*60*60*24*365)).toUTCString();
     }
-});/**
+});
+/**
  * Model object representing the component/method to call on locale
  * change as well as the key to use to obtain the value to pass to said method.
  */
@@ -185,7 +171,8 @@ Ext.define('nineam.localization.model.ClientModel', {
         {name: 'method', type: 'object'},
         {name: 'key', type: 'string'}
     ]
-});/**
+});
+/**
  * Locale event object w/ event names
  */
 Ext.define('nineam.localization.event.LocaleEvent', {
@@ -218,7 +205,8 @@ Ext.define('nineam.localization.event.LocaleEvent', {
          */
         LOCALE_CHANGED: 'nineam.localization.event.LocaleEvent.LOCALE_CHANGED'
     }
-});/**
+});
+/**
  * Delegate class responsable for loading locale property file.
  */
 Ext.define('nineam.localization.delegate.LocaleDelegate', {
@@ -297,7 +285,8 @@ Ext.define('nineam.localization.delegate.LocaleDelegate', {
     ajaxFailure: function() {
         //TODO: Implement fault handling
     }
-});/**
+});
+/**
  * Manager class to handle loading of locale properties
  * files/switching locales/updating registered components.
  *
@@ -575,7 +564,8 @@ Ext.define('nineam.localization.LocaleManager', {
         if(this.properties)
             this.updateClient(clientModel);
     }
-});/**
+});
+/**
  * ExtJS/Touch plugin used to register component with LocaleManager.
  */
 Ext.define('nineam.localization.LocalePlugin', {
