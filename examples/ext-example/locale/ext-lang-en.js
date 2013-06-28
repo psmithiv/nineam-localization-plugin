@@ -13,10 +13,11 @@ Ext.onReady(function() {
         },
 
         //Advanced example showing localization using custom refresh method
-        localeLabels: {
-            en_us: 'English',
-            es_us: 'Spanish'
-        }
+        localeLabels: [
+            {id: 'en_us', label: 'English'},
+            {id: 'es_us', label: 'Spanish'},
+            {id: 'fr_fr', label: 'French'}
+        ]
     });
 
     //Advanced example showing localization using Sencha's built in localization properties + custom refresh method

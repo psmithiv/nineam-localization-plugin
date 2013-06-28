@@ -13,13 +13,14 @@ Ext.onReady(function() {
         },
 
         //Advanced example showing localization using custom refresh method
-        localeLabels: {
-            en_us: 'Inglés',
-            es_us: 'Español'
-        }
+        localeLabels: [
+            {id: 'en_us', label: 'Inglés'},
+            {id: 'es_us', label: 'Español'},
+            {id: 'fr_fr', label: 'Francés'}
+        ]
     });
 
-    //Advanced example showing localization using Sencha's built in localization properties
+    //Advanced example showing localization using Sencha's built in localization properties + custom refresh method
     var cm = Ext.ClassManager,
         exists = Ext.Function.bind(cm.get, cm);
 
