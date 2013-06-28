@@ -133,7 +133,6 @@ Ext.define("nineam-localization-plugin-ext.view.Main", {
         items: [{
             xtype: 'label',
             width: 180,
-            //padding: '6px 0px 0px 0px',
             text: 'CSS Class (Custom Inline Method):'
         },{
             xtype: 'container',
