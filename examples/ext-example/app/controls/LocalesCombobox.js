@@ -20,12 +20,12 @@ Ext.define('nineam-localization-plugin-ext.controls.LocalesComboBox', {
         //create new store from old store's data
         var store = Ext.create('nineam.localization.store.LocalesStore', {
             data: data
-        })
+        });
 
         //update new store with new label values
         var labelsLen = labels.length;
-        for(var i=0; i<labelsLen; i++) {
-            var label = labels[i];
+        for(var j=0; j<labelsLen; j++) {
+            var label = labels[j];
             var itemIndex = store.find('id', label.id);
             store.getAt(itemIndex).set('label', label.label);
         }
@@ -36,4 +36,4 @@ Ext.define('nineam-localization-plugin-ext.controls.LocalesComboBox', {
         //reset selection
         this.setValue(this.store.getAt(selectionIndex));
     }
-})
+});
