@@ -435,7 +435,6 @@ Ext.define('nineam.localization.LocaleManager', {
 
         Ext.log({level: 'log'}, 'DEBUG: Constructing LocaleManager');
 
-        this.callParent(arguments);
         this.mixins.observable.constructor.call(this, config);
     },
 
