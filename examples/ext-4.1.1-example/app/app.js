@@ -45,7 +45,7 @@ Ext.application({
     },
 
     localeManagerInitializedEventHandler: function(event) {
-        console.log('STATUS EVENT: LocaleManager - INITIALIZED')
+        console.log('STATUS EVENT: LocaleManager - INITIALIZED');
     }
 });
 
