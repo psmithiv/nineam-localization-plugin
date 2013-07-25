@@ -509,6 +509,7 @@ Ext.define('nineam.localization.LocaleManager', {
      */
     updateClients: function() {
         Ext.log({level: 'log'}, 'DEBUG: LocaleManager - Updating Clients');
+
         var len = this.clients.length-1;
         for(var i=len; i>-1; i--) {
             this.updateClient(this.clients[i]);

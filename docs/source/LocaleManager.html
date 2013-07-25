@@ -164,7 +164,6 @@ Ext.define('nineam.localization.LocaleManager', {
 
         Ext.log({level: 'log'}, 'DEBUG: Constructing LocaleManager');
 
-        this.callParent(arguments);
         this.mixins.observable.constructor.call(this, config);
     },
 
@@ -239,6 +238,7 @@ Ext.define('nineam.localization.LocaleManager', {
      */
     updateClients: function() {
         Ext.log({level: 'log'}, 'DEBUG: LocaleManager - Updating Clients');
+
         var len = this.clients.length-1;
         for(var i=len; i&gt;-1; i--) {
             this.updateClient(this.clients[i]);
