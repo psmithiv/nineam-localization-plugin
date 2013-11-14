@@ -117,9 +117,9 @@ myLabel.setText(nineam.locale.LocaleManager.getProperty("comp.title"));
 
 ## Examples
 
-* [ExtJS](https://github.com/psmithiv/nineam-localization-plugin/tree/master/examples/ext-example)
+* [ExtJS](https://github.com/psmithiv/nineam-localization-plugin/tree/master/examples/ext-4.1.1-example)
 A simple example ExtJS application demonstrating runtime localization capabilities.
-* [Touch](https://github.com/psmithiv/nineam-localization-plugin/tree/master/examples/touch-example)
+* [Touch](https://github.com/psmithiv/nineam-localization-plugin/tree/master/examples/touch-2.2.1-example)
 A simple example Touch application demonstrating runtime localization capabilities.
 * [Cafe Townsend Demo Project](https://github.com/WebAppSolutionInc/sencha-cafe-townsend) - A HTML5 implementation 
 using Sencha ExtJS, Sencha Touch, DeftJS, FlowMVC, & Localization Plugin.
